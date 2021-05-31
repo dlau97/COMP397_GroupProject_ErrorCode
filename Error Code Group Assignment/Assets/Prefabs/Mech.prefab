@@ -70,9 +70,12 @@ MonoBehaviour:
   isDashing: 0
   groundRadius: 0.5
   maxSpeed: 10
-  gravity: -30
-  jumpHeight: 3
+  gravity: -50
+  jumpHeight: 4
   dashForce: 30
+  flightForce: 0.2
+  maxFlightFuel: 2000
+  flightFuel: 2000
   groundCheck: {fileID: 1633817587094716434}
   groundMask:
     serializedVersion: 2

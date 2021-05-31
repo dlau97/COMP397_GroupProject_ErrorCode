@@ -11,8 +11,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float groundRadius = 0.5f;
     public float maxSpeed = 10.0f;
     public float gravity = -30.0f;
-    public float jumpHeight = 3.0f;
+    public float jumpHeight = 4.0f;
     public float dashForce = 30.0f;
+    public float flightForce = 0.2f;
+    public float maxFlightFuel = 2000.0f;
+    public float flightFuel = 2000.0f;
     public Transform groundCheck;
     public LayerMask groundMask;
     public Vector3 velocity;
@@ -29,6 +32,11 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+
+        if (isGrounded && flightFuel <= (maxFlightFuel-1))
+        {
+            flightFuel++;
+        }
 
         if (isGrounded && velocity.y < 0)
         {
@@ -57,11 +65,17 @@ public class PlayerBehaviour : MonoBehaviour
             controller.Move(dashDirection * dashForce * Time.deltaTime);            
         }
 
-        if (Input.GetButton("Jump") && isGrounded)
+        if (Input.GetButtonUp("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
 
+        if (Input.GetButton("Jump") && isGrounded == false && flightFuel != 0.0f)
+        {          
+            velocity.y += flightForce;
+            flightFuel--;
+        }
+       
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
