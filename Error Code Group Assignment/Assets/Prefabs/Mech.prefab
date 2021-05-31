@@ -67,15 +67,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1633817585318367356}
   isGrounded: 0
+  isDashing: 0
   groundRadius: 0.5
   maxSpeed: 10
   gravity: -30
   jumpHeight: 3
+  dashForce: 30
   groundCheck: {fileID: 1633817587094716434}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   velocity: {x: 0, y: 0, z: 0}
+  move: {x: 0, y: 0, z: 0}
+  dashDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1633817586828896956
 GameObject:
   m_ObjectHideFlags: 0
