@@ -46,8 +46,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 2.45
+  m_Radius: 0.65
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -68,6 +68,10 @@ MonoBehaviour:
   controller: {fileID: 1633817585318367356}
   isGrounded: 0
   isDashing: 0
+  isAlarmOn: 0
+  isWalking: 0
+  isLanding: 0
+  isOutOFFuel: 0
   groundRadius: 0.5
   maxSpeed: 10
   gravity: -50
@@ -76,6 +80,7 @@ MonoBehaviour:
   flightForce: 0.2
   maxFlightFuel: 2000
   flightFuel: 2000
+  health: 100
   groundCheck: {fileID: 1633817587094716434}
   groundMask:
     serializedVersion: 2
@@ -92,6 +97,9 @@ MonoBehaviour:
   mechLowHealth: {fileID: 8300000, guid: 5d9fdec08cc2e4848af276f5db2beea5, type: 3}
   mechOutOfFuel: {fileID: 8300000, guid: d896b281fa71c2847a67248e07031413, type: 3}
   mechStep: {fileID: 8300000, guid: 841cac79de689824aa97d18c310a3b53, type: 3}
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 0}
 --- !u!1 &1633817586828896956
 GameObject:
   m_ObjectHideFlags: 0
