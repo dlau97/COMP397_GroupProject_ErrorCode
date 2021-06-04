@@ -20,6 +20,12 @@ public class EnemyController : MonoBehaviour
 
 
     //Static Enemy variables
+    public Transform shootLocation;
+    public GameObject enemyBullet;
+    public float shootDelay = 1f;
+    private float shootStartTime;
+
+    public float bulletSpeed = 16f;
 
     //Dynamic Enemy variables
 
@@ -31,6 +37,7 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerInRange = false;
+        shootStartTime = Time.time;
     }
 
     // Update is called once per frame
@@ -43,10 +50,10 @@ public class EnemyController : MonoBehaviour
             if(Physics.Raycast (visionRay, out hit, detectionRange) && (hit.transform.gameObject == player)){
                 LookTowardsPlayer();
                 if(enemyType == Enemy.Suicide){
-                    MoveTowardPlayer();
+                    //MoveTowardPlayer();
                 }
                 else if(enemyType == Enemy.Static){
-
+                    ShootBullet();
                 }
                 else if(enemyType == Enemy.Dynamic){
 
@@ -56,6 +63,19 @@ public class EnemyController : MonoBehaviour
                 //Debug.Log(hit,gameObject);
             }
         }
+    }
+
+    private void ShootBullet(){
+        if(Time.time >= shootStartTime + shootDelay){ //Ensure it only shoots after delay
+            Debug.Log("Shooting");
+            
+            GameObject bulletPrefab = Instantiate(enemyBullet, shootLocation.position, Quaternion.Euler (new Vector3 (90f, 0f, 0f)));
+            Rigidbody bulletRB = bulletPrefab.GetComponent<Rigidbody>();
+            Vector3 directionVector = player.transform.position - shootLocation.position;
+            bulletRB.velocity = directionVector.normalized * bulletSpeed;
+            shootStartTime = Time.time;
+        }
+
     }
 
     private void LookTowardsPlayer(){

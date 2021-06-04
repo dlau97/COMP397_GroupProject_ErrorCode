@@ -7,7 +7,7 @@ public class EnemyBulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(this.gameObject, 6f); //Destroy bullet if it doesn't collide with anything after 6 seconds 
     }
 
     // Update is called once per frame
