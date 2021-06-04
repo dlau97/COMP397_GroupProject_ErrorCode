@@ -32,11 +32,20 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip mechOutOfFuel;
     public AudioClip mechStep;
 
+    //HealthBar script
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource.PlayOneShot(mechStartup);
         controller = GetComponent<CharacterController>();
+        
+        //HealthBar setting
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -137,6 +146,12 @@ public class PlayerBehaviour : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        //Control HealthBar
+        if(Input.GetMouseButtonDown(0))
+        {
+            TakeDamage(10);
+        }
     }
 
     void OnDrawGizmos()
@@ -182,5 +197,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             isWalking = false;
         }
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 }
