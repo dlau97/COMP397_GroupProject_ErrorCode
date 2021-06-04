@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
             if(Physics.Raycast (visionRay, out hit, detectionRange) && (hit.transform.gameObject == player)){
                 LookTowardsPlayer();
                 if(enemyType == Enemy.Suicide){
-                    //MoveTowardPlayer();
+                    MoveTowardPlayer();
                 }
                 else if(enemyType == Enemy.Static){
                     ShootBullet();

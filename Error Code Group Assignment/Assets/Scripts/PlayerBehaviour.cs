@@ -107,7 +107,7 @@ public class PlayerBehaviour : MonoBehaviour
             audioSource.PlayOneShot(mechDash);
             dashDirection = move;
             Dash();
-            Invoke("Dash", 1);
+            Invoke("Dash", 0.25f);
         }
 
         if (isDashing == true)
