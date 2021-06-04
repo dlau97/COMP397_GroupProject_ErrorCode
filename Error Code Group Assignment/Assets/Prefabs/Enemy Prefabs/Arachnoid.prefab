@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4734522332044451841}
   - component: {fileID: 8111507227900822677}
   - component: {fileID: 7626371169865512067}
+  - component: {fileID: 6355708308767990828}
   m_Layer: 8
   m_Name: default
   m_TagString: Untagged
@@ -97,6 +98,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 7423f56154b153f4aaf7d2f0870ea63a, type: 3}
+--- !u!114 &6355708308767990828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717391927056648816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11780fd52f3e1843b818bf945a6cbd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 2
+  visionEye: {fileID: 3742318883776003247}
+  detectionRange: 15
+  rotationSpeed: 4
+  suicideMoveSpeed: 5
 --- !u!1 &3742318883776003247
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3742318883776003247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.71, z: 0.64}
+  m_LocalPosition: {x: 0, y: 1.33, z: 0.588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7593994372606843211}

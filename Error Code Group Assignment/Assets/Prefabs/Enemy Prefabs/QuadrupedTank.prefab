@@ -279,8 +279,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9084191037848581908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63333a0326181f4880b49287da46617, type: 3}
+  m_Script: {fileID: 11500000, guid: a11780fd52f3e1843b818bf945a6cbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   visionEye: {fileID: 4595817646882582009}
+  detectionRange: 15
   rotationSpeed: 4
+  suicideMoveSpeed: 5

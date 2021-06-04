@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyBulletController : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "Player"){
+            //Insert Damage code to player
+
+            //Insert any collision sfx / vfx
+
+            Destroy(this.gameObject);
+        }
+        else if(other.gameObject.tag == "Ground"){
+            //Insert any collision sfx / vfx
+
+            Destroy(this.gameObject);
+        }
+    }
+}
