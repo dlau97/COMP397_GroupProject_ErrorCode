@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: 4d4846413db8ec440b30289e91e47476
+  - enabled: 1
+    path: Assets/Scenes/Koey's Scene.unity
+    guid: 252b527e459ed4943bece41659261a31
+  - enabled: 1
+    path: Assets/Scenes/GameOverScreen.unity
+    guid: cc4c33e1b92c3cf43b1e9fe94e023675
   m_configObjects: {}

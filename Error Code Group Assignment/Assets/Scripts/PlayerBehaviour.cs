@@ -102,13 +102,19 @@ public class PlayerBehaviour : MonoBehaviour
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
 
+        /*
         if (isDashing == false && Input.GetButtonUp("Left Shift") && isGrounded && move != new Vector3(0, 0, 0))
         {
             audioSource.PlayOneShot(mechDash);
             dashDirection = move;
             Dash();
+<<<<<<< Updated upstream
             Invoke("Dash", 0.25f);
         }
+=======
+            Invoke("Dash", 1);
+        }*/
+>>>>>>> Stashed changes
 
         if (isDashing == true)
         {
