@@ -49,6 +49,9 @@ public class GunsController : MonoBehaviour
 
     void RightShoot(){
         RaycastHit hit;
+        Vector3 startPosition = fpsCamera.transform.position;
+        startPosition.z += 1f;
+
         if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range)){
             //Debug.Log(hit.transform.tag);
             source.PlayOneShot(cannonShootSFX);

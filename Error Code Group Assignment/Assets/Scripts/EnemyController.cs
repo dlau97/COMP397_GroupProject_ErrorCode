@@ -99,10 +99,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         if(other.gameObject == player){
             playerInRange = true;
-            Debug.Log("Player In Range");
+            //Debug.Log("Player In Range");
         }
     }
 
