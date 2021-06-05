@@ -7305,6 +7305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f1951c31b3a6b446907b316aa410890, type: 3}
+--- !u!82 &1118848083 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2407436202475701956, guid: eca4685f7e0a6384b810ddff98f43fd2, type: 3}
+  m_PrefabInstance: {fileID: 1941150957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1157574269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11641,6 +11646,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2065992405}
+    - target: {fileID: 5101144324028633060, guid: eca4685f7e0a6384b810ddff98f43fd2, type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1118848083}
+    - target: {fileID: 5101144324028633060, guid: eca4685f7e0a6384b810ddff98f43fd2, type: 3}
+      propertyPath: cannonShootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7285c82d1899f3943847e0de7acba8bb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eca4685f7e0a6384b810ddff98f43fd2, type: 3}
 --- !u!1001 &1955453811
