@@ -37,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,7 +115,6 @@ public class PlayerBehaviour : MonoBehaviour
 =======
             Invoke("Dash", 1);
         }*/
->>>>>>> Stashed changes
 
         if (isDashing == true)
         {
@@ -158,6 +158,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TakeDamage(10);
         }
+
     }
 
     void OnDrawGizmos()
@@ -205,10 +206,14 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    //Health bar control
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
     }
+
+    
+     
 }
