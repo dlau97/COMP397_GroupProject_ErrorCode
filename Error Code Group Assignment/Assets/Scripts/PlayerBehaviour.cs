@@ -103,18 +103,15 @@ public class PlayerBehaviour : MonoBehaviour
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
 
-        /*
-        if (isDashing == false && Input.GetButtonUp("Left Shift") && isGrounded && move != new Vector3(0, 0, 0))
+        
+        if (isDashing == false && Input.GetKeyUp(KeyCode.LeftShift) && isGrounded && move != new Vector3(0, 0, 0))
         {
             audioSource.PlayOneShot(mechDash);
             dashDirection = move;
             Dash();
-<<<<<<< Updated upstream
+
             Invoke("Dash", 0.25f);
         }
-=======
-            Invoke("Dash", 1);
-        }*/
 
         if (isDashing == true)
         {
@@ -123,13 +120,14 @@ public class PlayerBehaviour : MonoBehaviour
         
         if (Input.GetButtonUp("Jump") && isGrounded)
         {
-            audioSource.PlayOneShot(mechJump);
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            audioSource.PlayOneShot(mechJump);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded == false && flightFuel != 0.0f)
         {
             audioSource.PlayOneShot(mechFlight);
+
         }
 
         if (Input.GetButton("Jump") && isGrounded == false && flightFuel != 0.0f)
@@ -154,10 +152,10 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         //Control HealthBar
-        if(Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(10);
-        }
+        // if(Input.GetMouseButtonDown(0))
+        // {
+        //     TakeDamage(10);
+        // }
 
     }
 
@@ -207,7 +205,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //Health bar control
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 

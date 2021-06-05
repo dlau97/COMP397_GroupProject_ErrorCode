@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     private bool playerInRange = false;
     public float rotationSpeed = 4f;
 
+    public float health = 50f;
+
 
 
     //Static Enemy variables
@@ -88,8 +90,15 @@ public class EnemyController : MonoBehaviour
 		Debug.Log ("moving towards player");
 		Vector3 moveLocation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 		transform.position = Vector3.MoveTowards (transform.position, moveLocation, suicideMoveSpeed * Time.deltaTime);
-	
 	}
+
+    public void TakeDamage(float damage){
+        health -= damage;
+        if(health <= 0f){
+            Destroy(this.gameObject);
+        }
+    }
+
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject == player){
             playerInRange = true;

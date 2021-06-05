@@ -20,7 +20,7 @@ public class EnemyBulletController : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             //Insert Damage code to player
 
-            //Insert any collision sfx / vfx
+            other.gameObject.SendMessage("TakeDamage", 1);
 
             Destroy(this.gameObject);
         }

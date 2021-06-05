@@ -299,7 +299,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 18
   m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!114 &999398719
 MonoBehaviour:
@@ -315,10 +315,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   visionEye: {fileID: 4595817646882582009}
-  detectionRange: 15
+  detectionRange: 18
   rotationSpeed: 4
+  health: 50
   shootLocation: {fileID: 5647357627795190686}
   enemyBullet: {fileID: 2293272740108050287, guid: 93e10350f6a77ee498727c3c8abbe824, type: 3}
   shootDelay: 1
-  bulletSpeed: 1
+  bulletSpeed: 16
   suicideMoveSpeed: 5
