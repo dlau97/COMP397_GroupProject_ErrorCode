@@ -37,6 +37,7 @@ public class PausedMenu : MonoBehaviour
         ShowMouseCursor();
         Time.timeScale = 1f;
         GameIsPaused = false;
+        GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = true;
     }
 
     void Paused()
@@ -46,12 +47,13 @@ public class PausedMenu : MonoBehaviour
         ShowMouseCursor();
         Time.timeScale = 0f;
         GameIsPaused = true;
+        GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
 
     }
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Start Menu");
     }   
     
     public void QuitGame()

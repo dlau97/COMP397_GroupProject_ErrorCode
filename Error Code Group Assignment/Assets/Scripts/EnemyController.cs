@@ -99,6 +99,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other) {
+        if(enemyType == Enemy.Suicide){
+            if(other.gameObject.tag == "Player"){
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     private void OnTriggerStay(Collider other) {
         if(other.gameObject == player){
             playerInRange = true;

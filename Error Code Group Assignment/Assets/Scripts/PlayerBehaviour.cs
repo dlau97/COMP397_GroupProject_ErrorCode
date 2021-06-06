@@ -165,13 +165,13 @@ public class PlayerBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Bullet")
-        {
-            health--;
-        }
-    }
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.tag == "Bullet")
+    //     {
+    //         health--;
+    //     }
+    // }
 
     void Dash()
     {
