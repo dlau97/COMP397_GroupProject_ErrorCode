@@ -16,8 +16,8 @@ public class EnemyBulletController : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "Player"){
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "Player" || other.transform.tag == "Mech"){
             //Insert Damage code to player
 
             other.gameObject.SendMessage("TakeDamage", 1);

@@ -53,6 +53,10 @@ public class EnemyController : MonoBehaviour
                 LookTowardsPlayer();
                 if(enemyType == Enemy.Suicide){
                     MoveTowardPlayer();
+                    if(GetDistanceToPlayer() <= 2f){
+                        player.SendMessage("TakeDamage", 10f);
+                        Destroy(this.gameObject);
+                    }
                 }
                 else if(enemyType == Enemy.Static){
                     ShootBullet();
@@ -69,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
     private void ShootBullet(){
         if(Time.time >= shootStartTime + shootDelay){ //Ensure it only shoots after delay
-            Debug.Log("Shooting");
+            //Debug.Log("Shooting");
             
             GameObject bulletPrefab = Instantiate(enemyBullet, shootLocation.position, Quaternion.Euler (new Vector3 (90f, 0f, 0f)));
             Rigidbody bulletRB = bulletPrefab.GetComponent<Rigidbody>();
@@ -87,23 +91,23 @@ public class EnemyController : MonoBehaviour
     }
 
     private void MoveTowardPlayer(){
-		Debug.Log ("moving towards player");
+		//Debug.Log ("moving towards player");
 		Vector3 moveLocation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 		transform.position = Vector3.MoveTowards (transform.position, moveLocation, suicideMoveSpeed * Time.deltaTime);
 	}
+
+    private float GetDistanceToPlayer(){
+        float distance = 0f;
+        Vector3 playerLocation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        distance = Vector3.Distance(playerLocation, this.transform.position);
+
+        return Mathf.Abs(distance);
+    }
 
     public void TakeDamage(float damage){
         health -= damage;
         if(health <= 0f){
             Destroy(this.gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision other) {
-        if(enemyType == Enemy.Suicide){
-            if(other.gameObject.tag == "Player"){
-                Destroy(this.gameObject);
-            }
         }
     }
 

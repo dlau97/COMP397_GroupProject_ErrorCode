@@ -41,7 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource.PlayOneShot(mechStartup);
+        audioSource.PlayOneShot(mechStartup, 0.5f);
         controller = GetComponent<CharacterController>();
         
         //HealthBar setting
@@ -63,7 +63,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (isLanding == true && isGrounded == true)
         {
             isLanding = false;
-            audioSource.PlayOneShot(mechLanding);
+            audioSource.PlayOneShot(mechLanding, 0.5f);
         }
 
         if (isGrounded && flightFuel <= (maxFlightFuel - 1))
@@ -106,7 +106,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         if (isDashing == false && Input.GetKeyUp(KeyCode.LeftShift) && isGrounded && move != new Vector3(0, 0, 0))
         {
-            audioSource.PlayOneShot(mechDash);
+            audioSource.PlayOneShot(mechDash, 0.5f);
             dashDirection = move;
             Dash();
 
@@ -121,12 +121,12 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetButtonUp("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-            audioSource.PlayOneShot(mechJump);
+            audioSource.PlayOneShot(mechJump, 0.6f);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded == false && flightFuel != 0.0f)
         {
-            audioSource.PlayOneShot(mechFlight);
+            audioSource.PlayOneShot(mechFlight, 0.6f);
 
         }
 
@@ -139,12 +139,12 @@ public class PlayerBehaviour : MonoBehaviour
         if (flightFuel == 0.0f && isOutOFFuel == false)
         {
             isOutOFFuel = true;
-            audioSource.PlayOneShot(mechOutOfFuel);
+            audioSource.PlayOneShot(mechOutOfFuel, 0.5f);
         }
 
         if (isAlarmOn == false && health <= 25)
         {
-            audioSource.PlayOneShot(mechLowHealth);
+            audioSource.PlayOneShot(mechLowHealth, 0.5f);
             isAlarmOn = true;
         }
 
