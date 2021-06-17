@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Enemy
   - DeathCollider
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Enemy
   - PlayBody
   - EnemyBullet
-  - 
+  - Post Processing
   - 
   - 
   - 
