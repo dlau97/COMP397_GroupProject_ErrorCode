@@ -39,7 +39,7 @@ public class GunsController : MonoBehaviour
         if(Physics.Raycast(startPosition, fpsCamera.transform.forward, out hit, range)){
             //Debug.Log(hit.transform.tag);
             source.PlayOneShot(cannonShootSFX, 0.5f);
-            GameObject PlayerBullet1 = Instantiate(bullet, LeftShootLocation.transform.position, Quaternion.identity);
+            GameObject PlayerBullet1 = Instantiate(bullet, LeftShootLocation.transform.position, LeftShootLocation.transform.rotation);
             Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
             Vector3 directionVector = hit.point - LeftShootLocation.transform.position;
             bulletRB.velocity = directionVector.normalized * bulletSpeed;
@@ -55,7 +55,7 @@ public class GunsController : MonoBehaviour
         if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range)){
             //Debug.Log(hit.transform.tag);
             source.PlayOneShot(cannonShootSFX, 0.5f);
-            GameObject PlayerBullet2 = Instantiate(bullet, RightShootLocation.transform.position, Quaternion.identity);
+            GameObject PlayerBullet2 = Instantiate(bullet, RightShootLocation.transform.position, RightShootLocation.transform.rotation);
             Rigidbody bulletRB = PlayerBullet2.GetComponent<Rigidbody>();
             Vector3 directionVector = hit.point - RightShootLocation.transform.position;
             bulletRB.velocity = directionVector.normalized * bulletSpeed;
