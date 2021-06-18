@@ -19,14 +19,16 @@ public class PlayerBulletController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Enemy"){
+        if (other.gameObject.tag == "Enemy")
+        {
             //Insert Damage code to player
 
             other.gameObject.SendMessage("TakeDamage", BulletDamage);
 
             Destroy(this.gameObject);
         }
-        else if(other.gameObject.tag == "Ground"){
+        else if (other.gameObject.tag == "Ground")
+        {
             //Insert any collision sfx / vfx
 
             Destroy(this.gameObject);

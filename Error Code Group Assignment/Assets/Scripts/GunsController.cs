@@ -36,7 +36,7 @@ public class GunsController : MonoBehaviour
         Vector3 startPosition = fpsCamera.transform.position;
         startPosition.z += 1f;
 
-        if(Physics.Raycast(startPosition, fpsCamera.transform.forward, out hit, range)){
+        if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range)){
             //Debug.Log(hit.transform.tag);
             source.PlayOneShot(cannonShootSFX, 0.5f);
             GameObject PlayerBullet1 = Instantiate(bullet, LeftShootLocation.transform.position, LeftShootLocation.transform.rotation);
