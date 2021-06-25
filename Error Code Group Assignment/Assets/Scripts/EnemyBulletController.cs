@@ -20,7 +20,7 @@ public class EnemyBulletController : MonoBehaviour
         if(other.gameObject.tag == "Player" || other.transform.tag == "Mech"){
             //Insert Damage code to player
 
-            other.gameObject.SendMessage("TakeDamage", 1);
+            other.gameObject.SendMessage("TakeDamage", 10);
 
             Destroy(this.gameObject);
         }

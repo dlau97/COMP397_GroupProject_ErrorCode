@@ -205,12 +205,14 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //Health bar control
+    
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
     }
+    
 
     
      
