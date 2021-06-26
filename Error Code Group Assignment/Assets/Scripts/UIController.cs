@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject healthBarUI;
     public GameObject InventoryUI;
     public GameObject OptionsUI;
+    public GameObject crosshairUI;
 
     public Pausable pausable;
 
@@ -31,10 +32,6 @@ public class UIController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameIsPaused = !GameIsPaused;
-            
-
-
-            playerCamera.enabled = false;
             Debug.Log("Esc");
             
             if (GameIsPaused)
@@ -46,19 +43,36 @@ public class UIController : MonoBehaviour
             else
             {
 
-                Resume();
+                PausedResume();
+
+            }
+        }   
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            GameIsPaused = !GameIsPaused;
+            if (GameIsPaused)
+            {
+
+                InventoryPaused();
+
+            }
+            else
+            {
+
+                InventoryResume();
 
             }
         }
     }
 
-    public void Resume()
+    public void PausedResume()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerCamera.enabled = true;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(false);
         healthBarUI.SetActive(true);
+        crosshairUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = true;
@@ -71,9 +85,36 @@ public class UIController : MonoBehaviour
         pausable.TogglePaused();
         pauseMenuUI.SetActive(true);
         healthBarUI.SetActive(false);
+        crosshairUI.SetActive(false);
         Time.timeScale = 0f;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
 
+    }
+
+    void InventoryPaused()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        playerCamera.enabled = false;
+        pausable.TogglePaused();
+        InventoryUI.SetActive(true);
+        healthBarUI.SetActive(false);
+        crosshairUI.SetActive(false);
+        Time.timeScale = 0f;
+        GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
+
+    }
+
+    public void InventoryResume()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        playerCamera.enabled = true;
+        pausable.TogglePaused();
+        InventoryUI.SetActive(false);
+        healthBarUI.SetActive(true);
+        crosshairUI.SetActive(true);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = true;
     }
 
     public void LoadMenu()
