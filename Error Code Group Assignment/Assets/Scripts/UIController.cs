@@ -47,20 +47,17 @@ public class UIController : MonoBehaviour
 
             }
         }   
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             GameIsPaused = !GameIsPaused;
+            
             if (GameIsPaused)
             {
-
                 InventoryPaused();
-
             }
             else
             {
-
                 InventoryResume();
-
             }
         }
     }
@@ -71,7 +68,6 @@ public class UIController : MonoBehaviour
         playerCamera.enabled = true;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(false);
-        healthBarUI.SetActive(true);
         crosshairUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -84,7 +80,6 @@ public class UIController : MonoBehaviour
         playerCamera.enabled = false;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(true);
-        healthBarUI.SetActive(false);
         crosshairUI.SetActive(false);
         Time.timeScale = 0f;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
@@ -94,10 +89,10 @@ public class UIController : MonoBehaviour
     void InventoryPaused()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         playerCamera.enabled = false;
         pausable.TogglePaused();
         InventoryUI.SetActive(true);
-        healthBarUI.SetActive(false);
         crosshairUI.SetActive(false);
         Time.timeScale = 0f;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
@@ -107,10 +102,10 @@ public class UIController : MonoBehaviour
     public void InventoryResume()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerCamera.enabled = true;
         pausable.TogglePaused();
         InventoryUI.SetActive(false);
-        healthBarUI.SetActive(true);
         crosshairUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -128,15 +123,15 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
-    public void ShowMouseCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
+    //public void ShowMouseCursor()
+    //{
+    //    Cursor.visible = true;
+    //    Cursor.lockState = CursorLockMode.None;
+    //}
 
-    public void HideMouseCursor()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    //public void HideMouseCursor()
+    //{
+    //    Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //}
 }
