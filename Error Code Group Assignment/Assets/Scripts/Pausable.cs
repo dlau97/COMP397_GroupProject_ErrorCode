@@ -24,9 +24,5 @@ public class Pausable : MonoBehaviour
             script.enabled = !isGamePaused;
         }
 
-        //foreach (var agent in agents)
-        //{
-        //    agent.enabled = !isGamePaused;
-        //}
     }
 }

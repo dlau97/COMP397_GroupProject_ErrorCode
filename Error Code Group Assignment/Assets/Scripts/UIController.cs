@@ -128,15 +128,15 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
-    //    public void ShowMouseCursor()
-    //    {
-    //        Cursor.visible = true;
-    //        Cursor.lockState = CursorLockMode.None;
-    //    }
+    public void ShowMouseCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
-    //    public void HideMouseCursor()
-    //    {
-    //        Cursor.visible = false;
-    //        Cursor.lockState = CursorLockMode.Locked;
-    //    }
+    public void HideMouseCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }

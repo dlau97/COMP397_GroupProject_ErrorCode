@@ -13,8 +13,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float jumpHeight = 4.0f;
     public float dashForce = 30.0f;
     public float flightForce = 0.2f;
-    public float maxFlightFuel = 2000.0f;
-    public float flightFuel = 2000.0f;
     public float health = 100.0f;
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -22,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector3 move;
     public Vector3 dashDirection;
 
+    [Header("Audio Clip")]
     public AudioSource audioSource;
     public AudioClip mechStartup;
     public AudioClip mechDash;
@@ -32,10 +31,15 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip mechOutOfFuel;
     public AudioClip mechStep;
 
-    //HealthBar script
+    [Header("Health Bar setting")]
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
+
+    [Header("Fuel Bar setting")]
+    public FuelBar fuelBar;
+    public float maxFlightFuel = 2000.0f;
+    public float flightFuel;
 
 
     // Start is called before the first frame update
@@ -47,6 +51,10 @@ public class PlayerBehaviour : MonoBehaviour
         //HealthBar setting
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        //Fuel setting
+        flightFuel = maxFlightFuel;
+        fuelBar.SetMaxFuel(maxFlightFuel);
     }
 
     // Update is called once per frame
@@ -69,6 +77,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (isGrounded && flightFuel <= (maxFlightFuel - 1))
         {
             flightFuel++;
+            fuelBar.SetFuel(flightFuel);
             isOutOFFuel = false;
         }
 
@@ -134,6 +143,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             velocity.y += flightForce;
             flightFuel--;
+            fuelBar.SetFuel(flightFuel);
         }
 
         if (flightFuel == 0.0f && isOutOFFuel == false)
@@ -151,12 +161,6 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        //Control HealthBar
-        // if(Input.GetMouseButtonDown(0))
-        // {
-        //     TakeDamage(10);
-        // }
-
     }
 
     void OnDrawGizmos()
@@ -164,14 +168,6 @@ public class PlayerBehaviour : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
-
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.tag == "Bullet")
-    //     {
-    //         health--;
-    //     }
-    // }
 
     void Dash()
     {

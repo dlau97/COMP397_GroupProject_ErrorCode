@@ -7,21 +7,58 @@ public class GunsController : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
 
-    public GameObject m107Left, m107SpawnLeft, m249Left, m249SpawnLeft, bennelliM4Left, bennelliM4SpawnLeft, rPG7Left, rPG7SpawnLeft,
-        m107Right, m107SpawnRight, m249Right, m249SpawnRight, bennelliM4Right, bennelliM4SpawnRight, rPG7Right, rPG7SpawnRight;
-    public GameObject m107Bullet, m249Bullet, bennelliM4Bullet, rPG7Bullet;
+    
 
-    public int m249Clip = 200, m249CurrentClipLeft = 0, m249CurrentClipRight = 0, m249Ammo = 0,
-        bennelliM4Clip = 6, bennelliM4CurrentClipLeft = 0, bennelliM4CurrentClipRight = 0, bennelliM4Ammo = 0,
-        rPG7Clip = 1, rPG7CurrentClipLeft = 0, rPG7CurrentClipRight = 0, rPG7Ammo = 0;
+    [Header("Gun M107")]
+    public GameObject m107Left;
+    public GameObject m107SpawnLeft;
+    public GameObject m107Right;
+    public GameObject m107SpawnRight;
+    public GameObject m107Bullet;
 
+    [Header("Gun M249")]
+    public GameObject m249Left;
+    public GameObject m249SpawnLeft;
+    public GameObject m249Right;
+    public GameObject m249SpawnRight;
+    public GameObject m249Bullet;
+    public int m249Clip = 200;
+    public int m249CurrentClipLeft = 0;
+    public int m249CurrentClipRight = 0;
+    public int m249Ammo = 0;
+
+     [Header("Gun Bennelli M4")]
+    public GameObject bennelliM4Left;
+    public GameObject bennelliM4SpawnLeft;
+    public GameObject bennelliM4Right;
+    public GameObject bennelliM4SpawnRight;
+    public GameObject bennelliM4Bullet;
+    public int bennelliM4Clip = 6;
+    public int bennelliM4CurrentClipLeft = 0;
+    public int bennelliM4CurrentClipRight = 0;
+    public int bennelliM4Ammo = 0;
+
+    [Header("Gun RPG7")]
+    public GameObject rPG7Left;
+    public GameObject rPG7SpawnLeft;
+    public GameObject rPG7Right;
+    public GameObject rPG7SpawnRight;
+    public GameObject rPG7Bullet;
+    public int rPG7Clip = 1;
+    public int rPG7CurrentClipLeft = 0;
+    public int rPG7CurrentClipRight = 0;
+    public int rPG7Ammo = 0;
+
+    [Header("Bullet Setting")]
     public GameObject bullet;
     public float bulletSpeed = 40f;
     public Camera fpsCamera;
 
+    [Header("Audio")]
     public AudioSource source;
     public AudioClip cannonShootSFX;
 
+    [Header("Other setting")]
     private bool isReloadingLeft, isReloadingRight, isBennelliM4DelayLeft, isBennelliM4DelayRight;
     private RaycastHit hit;
     private Vector3 startPosition;
