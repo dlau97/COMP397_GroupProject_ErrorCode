@@ -137,6 +137,7 @@ public class EnemyController : MonoBehaviour
         if(health <= 0f){
             Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
+            GameObject.Find("Game Manager").SendMessage("EnemyKill");
             Destroy(this.gameObject);
         }
     }
