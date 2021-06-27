@@ -205,7 +205,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        GameObject.Find("Sound Controller").SendMessage("PlayMetalImpactSFX");
         healthBar.SetHealth(currentHealth);
         FindObjectOfType<CameraController>().ShakeScreen(0.3f);
         if(currentHealth <= 0f){

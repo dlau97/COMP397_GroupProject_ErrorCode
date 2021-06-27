@@ -19358,6 +19358,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 7733554ee3c4fbc429e387286a19af22, type: 3}
     - target: {fileID: 5993609823964852617, guid: f5e596fe94c69c445a5884a95693f3d7, type: 3}
+      propertyPath: mineExplodeSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 9bf40f6a5a67d8445a66fbc2724575fa, type: 3}
+    - target: {fileID: 5993609823964852617, guid: f5e596fe94c69c445a5884a95693f3d7, type: 3}
       propertyPath: enemyExplodeSFX
       value: 
       objectReference: {fileID: 8300000, guid: 63185ec9b5147b64c92812428ee210c0, type: 3}

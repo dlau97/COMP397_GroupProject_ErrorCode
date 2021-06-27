@@ -95,13 +95,13 @@ public class EnemyController : MonoBehaviour
     private void ShootBullet(){
         if(Time.time >= shootStartTime + shootDelay){ //Ensure it only shoots after delay
             //Debug.Log("Shooting");
-            
+            GameObject.Find("Sound Controller").SendMessage("PlayEnemyShootSFX");
             GameObject bulletPrefab = Instantiate(enemyBullet, shootLocation.position, Quaternion.Euler (new Vector3 (90f, 0f, 0f)));
             Rigidbody bulletRB = bulletPrefab.GetComponent<Rigidbody>();
             Vector3 directionVector = player.transform.position - shootLocation.position;
             bulletRB.velocity = directionVector.normalized * bulletSpeed;
             shootStartTime = Time.time;
-            GameObject.Find("Sound Controller").SendMessage("PlayEnemyShootSFX");
+
         }
 
     }
