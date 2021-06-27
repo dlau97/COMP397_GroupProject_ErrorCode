@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 3394498166228229652}
   - component: {fileID: 5889421219743465137}
   - component: {fileID: 5889421219743465138}
+  - component: {fileID: 3990454951594606442}
   m_Layer: 0
   m_Name: SuicideEnemy New
   m_TagString: Enemy
@@ -747,7 +748,7 @@ MonoBehaviour:
   visionEye: {fileID: 1745243830521650371}
   detectionRange: 15
   rotationSpeed: 4
-  health: 50
+  health: 30
   shootLocation: {fileID: 0}
   enemyBullet: {fileID: 0}
   shootDelay: 1
@@ -755,6 +756,7 @@ MonoBehaviour:
   agent: {fileID: 5889421219743465137}
   animator: {fileID: 5889421219743465138}
   suicideMoveSpeed: 5
+  explosionFX: {fileID: 6731547724847521487, guid: 42252aa099228ba40a1ab7f70fcf418f, type: 3}
 --- !u!195 &5889421219743465137
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -796,6 +798,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &3990454951594606442
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182865050512609173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1.9199104
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1825609, z: 0}
 --- !u!1 &4854832095063079511
 GameObject:
   m_ObjectHideFlags: 0

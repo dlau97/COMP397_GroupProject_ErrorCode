@@ -82,7 +82,7 @@ public class GunsController : MonoBehaviour
                     bulletRB.velocity = directionVector.normalized * bulletSpeed;
                 }
                 isReloadingLeft = true;
-                Invoke("IsReloadingLeft", 1.0f);
+                Invoke("IsReloadingLeft", 0.5f);
             }
             else if (bennelliM4Left.activeInHierarchy == true && isReloadingLeft == false && isBennelliM4DelayLeft == false)
             {
@@ -143,7 +143,7 @@ public class GunsController : MonoBehaviour
                     bulletRB.velocity = directionVector.normalized * bulletSpeed;
                 }
                 isReloadingRight = true;
-                Invoke("IsReloadingRight", 1.0f);
+                Invoke("IsReloadingRight", 0.5f);
             }
             else if (bennelliM4Right.activeInHierarchy == true && isReloadingRight == false && isBennelliM4DelayRight == false)
             {

@@ -38,6 +38,10 @@ public class EnemyController : MonoBehaviour
     //Suicide Enemy variables
     public float suicideMoveSpeed = 5f;
 
+    public GameObject explosionFX;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +63,8 @@ public class EnemyController : MonoBehaviour
                     SuicideMoveTowardsPlayer();
                     if(GetDistanceToPlayer() <= 2.5f){
                         player.SendMessage("TakeDamage", 20f);
+                        Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
                         Destroy(this.gameObject);
                     }
                 }
@@ -95,6 +101,7 @@ public class EnemyController : MonoBehaviour
             Vector3 directionVector = player.transform.position - shootLocation.position;
             bulletRB.velocity = directionVector.normalized * bulletSpeed;
             shootStartTime = Time.time;
+            GameObject.Find("Sound Controller").SendMessage("PlayEnemyShootSFX");
         }
 
     }
@@ -126,7 +133,10 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage){
         health -= damage;
+        GameObject.Find("Sound Controller").SendMessage("PlayMetalImpactSFX");
         if(health <= 0f){
+            Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
             Destroy(this.gameObject);
         }
     }
@@ -144,4 +154,5 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Player Out of Range");
         }
     }
+
 }

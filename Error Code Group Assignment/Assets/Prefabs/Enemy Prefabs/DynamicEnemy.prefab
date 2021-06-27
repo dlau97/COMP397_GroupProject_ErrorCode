@@ -312,6 +312,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   animator: {fileID: 0}
   suicideMoveSpeed: 4
+  explosionFX: {fileID: 6731547724847521487, guid: 42252aa099228ba40a1ab7f70fcf418f, type: 3}
 --- !u!135 &1484541445705986310
 SphereCollider:
   m_ObjectHideFlags: 0

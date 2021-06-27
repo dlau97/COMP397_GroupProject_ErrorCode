@@ -322,4 +322,7 @@ MonoBehaviour:
   enemyBullet: {fileID: 2293272740108050287, guid: 93e10350f6a77ee498727c3c8abbe824, type: 3}
   shootDelay: 1
   bulletSpeed: 16
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   suicideMoveSpeed: 5
+  explosionFX: {fileID: 6731547724847521487, guid: 42252aa099228ba40a1ab7f70fcf418f, type: 3}

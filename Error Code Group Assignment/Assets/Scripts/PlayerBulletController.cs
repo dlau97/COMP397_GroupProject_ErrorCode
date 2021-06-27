@@ -25,8 +25,10 @@ public class PlayerBulletController : MonoBehaviour
 
             if(other.gameObject.GetComponentInParent<EnemyController>() != null){
                 other.gameObject.GetComponentInParent<EnemyController>().TakeDamage(BulletDamage);
+
             }else{
                 other.gameObject.SendMessage("TakeDamage", BulletDamage);
+
             }
 
             Destroy(this.gameObject);
