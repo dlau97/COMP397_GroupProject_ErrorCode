@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - DeathCollider
   - Fire
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

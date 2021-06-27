@@ -21,5 +21,8 @@ public class LandMineController : MonoBehaviour
             other.gameObject.SendMessage("TakeDamage", 25f);
             Destroy(this.gameObject);
         }
+        else if(other.gameObject.tag == "PlayerBullet"){
+            Destroy(this.gameObject);
+        }
     }
 }
