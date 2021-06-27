@@ -21,7 +21,10 @@ public class Pausable : MonoBehaviour
 
         foreach (var script in scripts)
         {
-            script.enabled = !isGamePaused;
+            if(script != null){
+                script.enabled = !isGamePaused;
+            }
+            
         }
 
     }
