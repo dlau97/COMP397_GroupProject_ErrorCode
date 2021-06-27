@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Runtime.Serialization;
 
 public class EnemyController : MonoBehaviour
 {
 
-    public enum Enemy {Static, Dynamic, Suicide};
+    public enum Enemy
+    {
+        [EnumMember(Value = "Static")]
+        Static,
+
+        [EnumMember(Value = "Dynamic")]
+        Dynamic,
+
+        [EnumMember(Value = "Suicide")] 
+        Suicide
+    };
     public Enemy enemyType = Enemy.Static;
 
     private GameObject player;

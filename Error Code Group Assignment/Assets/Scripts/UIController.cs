@@ -123,6 +123,22 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
+    public void SaveGame()
+    {
+        Debug.Log("Saving game");
+        
+        PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
+        List<EnemyController> enemyControllers = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+        GunsController gunController = FindObjectOfType<GunsController>();
+
+        Save save = Save.Build(
+            playerBehaviour,
+            enemyControllers,
+            gunController
+        );
+        save.Persist();
+    }
+
     //public void ShowMouseCursor()
     //{
     //    Cursor.visible = true;

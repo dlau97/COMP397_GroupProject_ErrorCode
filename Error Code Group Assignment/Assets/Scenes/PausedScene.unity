@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964128, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -394,6 +394,34 @@ PrefabInstance:
     - target: {fileID: 4180118502356700577, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
       propertyPath: m_Name
       value: SaveGameButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 438004868}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180118502356700583, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4136e9321c81b7847b6d3ada7bfafdcd, type: 3}
@@ -1047,6 +1075,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1158043877}
+  healthBarUI: {fileID: 0}
+  InventoryUI: {fileID: 0}
+  OptionsUI: {fileID: 0}
+  crosshairUI: {fileID: 0}
+  pausable: {fileID: 0}
+  playerCamera: {fileID: 0}
 --- !u!1001 &476148394
 PrefabInstance:
   m_ObjectHideFlags: 0
