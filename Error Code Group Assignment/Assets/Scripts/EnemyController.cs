@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class EnemyController : MonoBehaviour
 
     public float bulletSpeed = 16f;
 
+    public NavMeshAgent agent;
+    public Animator animator;
+
     //Dynamic Enemy variables
 
     //Suicide Enemy variables
@@ -50,28 +54,34 @@ public class EnemyController : MonoBehaviour
             Ray visionRay = new Ray(visionEye.transform.position, player.transform.position - visionEye.transform.position); //create raycast from enemy to player
             Debug.DrawLine (visionEye.transform.position,  player.transform.position, Color.red); //Visually draw a visible red raycast line from enemy to player
             if(Physics.Raycast (visionRay, out hit, detectionRange) && (hit.transform.gameObject == player)){
-                LookTowardsPlayer();
+                
                 if(enemyType == Enemy.Suicide){
-                    MoveTowardPlayer();
+                    SuicideMoveTowardsPlayer();
                     if(GetDistanceToPlayer() <= 2.5f){
-                        player.SendMessage("TakeDamage", 10f);
+                        player.SendMessage("TakeDamage", 20f);
                         Destroy(this.gameObject);
                     }
                 }
                 else if(enemyType == Enemy.Static){
+                    LookTowardsPlayer();
                     ShootBullet();
                 }
                 else if(enemyType == Enemy.Dynamic){
+                    LookTowardsPlayer();
                     ShootBullet();
-                    MoveTowardPlayer();
+                    DynamicMoveTowardPlayer();
                     if(GetDistanceToPlayer() <= 2.5f){
-                        player.SendMessage("TakeDamage", 10f);
+                        player.SendMessage("TakeDamage", 20f);
                         Destroy(this.gameObject);
                     }
                 }
             }
             else{
                 //Debug.Log(hit,gameObject);
+                if(enemyType == Enemy.Suicide){
+                    animator.SetBool("Running", false);
+                }
+
             }
         }
     }
@@ -95,7 +105,12 @@ public class EnemyController : MonoBehaviour
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (playerDir), Time.deltaTime * rotationSpeed);
     }
 
-    private void MoveTowardPlayer(){
+    private void SuicideMoveTowardsPlayer(){
+        animator.SetBool("Running", true);
+        agent.SetDestination(player.transform.position);
+    }
+
+    private void DynamicMoveTowardPlayer(){
 		//Debug.Log ("moving towards player");
 		Vector3 moveLocation = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
 		transform.position = Vector3.MoveTowards (transform.position, moveLocation, suicideMoveSpeed * Time.deltaTime);

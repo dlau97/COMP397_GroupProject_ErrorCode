@@ -206,6 +206,7 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        FindObjectOfType<CameraController>().ShakeScreen(0.4f);
     }
     
 
