@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class UIController : MonoBehaviour
 {
     public static bool GameIsPaused = false;
@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     public GameObject InventoryUI;
     public GameObject OptionsUI;
     public GameObject crosshairUI;
+
+    public GameObject enemyCounterText;
 
     public Pausable pausable;
 
@@ -69,6 +71,7 @@ public class UIController : MonoBehaviour
         pausable.TogglePaused();
         pauseMenuUI.SetActive(false);
         crosshairUI.SetActive(true);
+        enemyCounterText.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = true;
@@ -80,8 +83,10 @@ public class UIController : MonoBehaviour
         playerCamera.enabled = false;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(true);
+        enemyCounterText.SetActive(false);
         crosshairUI.SetActive(false);
         Time.timeScale = 0f;
+        GameIsPaused = true;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
 
     }
@@ -93,8 +98,10 @@ public class UIController : MonoBehaviour
         playerCamera.enabled = false;
         pausable.TogglePaused();
         InventoryUI.SetActive(true);
+        enemyCounterText.SetActive(false);
         crosshairUI.SetActive(false);
         Time.timeScale = 0f;
+        GameIsPaused = true;
         GameObject.Find("Mech").GetComponentInChildren<GunsController>().enabled = false;
 
     }
@@ -106,6 +113,7 @@ public class UIController : MonoBehaviour
         playerCamera.enabled = true;
         pausable.TogglePaused();
         InventoryUI.SetActive(false);
+        enemyCounterText.SetActive(true);
         crosshairUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;

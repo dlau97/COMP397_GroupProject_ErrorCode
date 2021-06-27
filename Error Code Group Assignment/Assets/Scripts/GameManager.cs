@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public int enemiesLeft = 50;
     bool gameHasEnded = false;
+
+    public TextMeshProUGUI enemyCounterText;
+
 
     public void EndGame()
     {
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public void EnemyKill(){
         enemiesLeft--;
+        enemyCounterText.text = "Enemies Left: "+enemiesLeft;
         if(enemiesLeft <=0){
             SceneManager.LoadScene("Win Scene");
         }
