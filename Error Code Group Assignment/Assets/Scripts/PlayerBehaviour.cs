@@ -125,19 +125,18 @@ public class PlayerBehaviour : MonoBehaviour
         if (isDashing == true)
         {
             controller.Move(dashDirection * dashForce * Time.deltaTime);
-        }        
-        
-        if (Input.GetButtonUp("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-            audioSource.PlayOneShot(mechJump, 0.6f);
-        }
+        }    
+        if(Input.GetButtonDown("Jump")){
+            if(isGrounded){
+                velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+                audioSource.PlayOneShot(mechJump, 0.6f);
+            }
+            else if(!isGrounded && flightFuel != 0.0f){
+                audioSource.PlayOneShot(mechFlight, 0.6f);
+            }
 
-        if (Input.GetButtonDown("Jump") && isGrounded == false && flightFuel != 0.0f)
-        {
-            audioSource.PlayOneShot(mechFlight, 0.6f);
+        }    
 
-        }
 
         if (Input.GetButton("Jump") && isGrounded == false && flightFuel != 0.0f)
         {

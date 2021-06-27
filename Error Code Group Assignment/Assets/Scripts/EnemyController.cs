@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
                 LookTowardsPlayer();
                 if(enemyType == Enemy.Suicide){
                     MoveTowardPlayer();
-                    if(GetDistanceToPlayer() <= 2f){
+                    if(GetDistanceToPlayer() <= 2.5f){
                         player.SendMessage("TakeDamage", 10f);
                         Destroy(this.gameObject);
                     }
@@ -62,7 +62,12 @@ public class EnemyController : MonoBehaviour
                     ShootBullet();
                 }
                 else if(enemyType == Enemy.Dynamic){
-
+                    ShootBullet();
+                    MoveTowardPlayer();
+                    if(GetDistanceToPlayer() <= 2.5f){
+                        player.SendMessage("TakeDamage", 10f);
+                        Destroy(this.gameObject);
+                    }
                 }
             }
             else{
@@ -86,13 +91,13 @@ public class EnemyController : MonoBehaviour
 
     private void LookTowardsPlayer(){
         Vector3 playerDir = player.transform.position - this.transform.position;
-		playerDir.y = 0f;
+		//playerDir.y = 0f;
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (playerDir), Time.deltaTime * rotationSpeed);
     }
 
     private void MoveTowardPlayer(){
 		//Debug.Log ("moving towards player");
-		Vector3 moveLocation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+		Vector3 moveLocation = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
 		transform.position = Vector3.MoveTowards (transform.position, moveLocation, suicideMoveSpeed * Time.deltaTime);
 	}
 
