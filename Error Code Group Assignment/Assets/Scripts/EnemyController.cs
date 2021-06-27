@@ -49,6 +49,10 @@ public class EnemyController : MonoBehaviour
     //Suicide Enemy variables
     public float suicideMoveSpeed = 5f;
 
+    public GameObject explosionFX;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +74,8 @@ public class EnemyController : MonoBehaviour
                     SuicideMoveTowardsPlayer();
                     if(GetDistanceToPlayer() <= 2.5f){
                         player.SendMessage("TakeDamage", 20f);
+                        Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
                         Destroy(this.gameObject);
                     }
                 }
@@ -100,12 +106,13 @@ public class EnemyController : MonoBehaviour
     private void ShootBullet(){
         if(Time.time >= shootStartTime + shootDelay){ //Ensure it only shoots after delay
             //Debug.Log("Shooting");
-            
+            GameObject.Find("Sound Controller").SendMessage("PlayEnemyShootSFX");
             GameObject bulletPrefab = Instantiate(enemyBullet, shootLocation.position, Quaternion.Euler (new Vector3 (90f, 0f, 0f)));
             Rigidbody bulletRB = bulletPrefab.GetComponent<Rigidbody>();
             Vector3 directionVector = player.transform.position - shootLocation.position;
             bulletRB.velocity = directionVector.normalized * bulletSpeed;
             shootStartTime = Time.time;
+
         }
 
     }
@@ -137,7 +144,11 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage){
         health -= damage;
+        GameObject.Find("Sound Controller").SendMessage("PlayMetalImpactSFX");
         if(health <= 0f){
+            Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
+            GameObject.Find("Game Manager").SendMessage("EnemyKill");
             Destroy(this.gameObject);
         }
     }
@@ -155,4 +166,5 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Player Out of Range");
         }
     }
+
 }

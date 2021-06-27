@@ -23,7 +23,13 @@ public class PlayerBulletController : MonoBehaviour
         {
             //Insert Damage code to player
 
-            other.gameObject.SendMessage("TakeDamage", BulletDamage);
+            if(other.gameObject.GetComponentInParent<EnemyController>() != null){
+                other.gameObject.GetComponentInParent<EnemyController>().TakeDamage(BulletDamage);
+
+            }else{
+                other.gameObject.SendMessage("TakeDamage", BulletDamage);
+
+            }
 
             Destroy(this.gameObject);
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -204,9 +205,13 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        GameObject.Find("Sound Controller").SendMessage("PlayMetalImpactSFX");
         healthBar.SetHealth(currentHealth);
-        FindObjectOfType<CameraController>().ShakeScreen(0.4f);
+        FindObjectOfType<CameraController>().ShakeScreen(0.3f);
+        if(currentHealth <= 0f){
+            Debug.Log("Player Dead");
+            SceneManager.LoadScene("Game Over Screen");
+        }
     }
     
 
