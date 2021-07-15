@@ -477,6 +477,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 1000
   playerBody: {fileID: 1633817585318367357}
+  shakeIntensity: 0.5
+  decreaseFactor:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  cameraTransform: {fileID: 0}
 --- !u!82 &2407436202475701956
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1171,7 +1179,13 @@ MonoBehaviour:
   bulletSpeed: 40
   fpsCamera: {fileID: 1633817586828896958}
   source: {fileID: 2407436202475701956}
-  cannonShootSFX: {fileID: 8300000, guid: 7285c82d1899f3943847e0de7acba8bb, type: 3}
+  m107: {fileID: 8300000, guid: 6f65d9f0cfe9a5a48aa4aefec6e102e3, type: 3}
+  m249: {fileID: 8300000, guid: 7285c82d1899f3943847e0de7acba8bb, type: 3}
+  m249Reload: {fileID: 8300000, guid: 735e1f4c719c7dc4bb6305a9cbfd80f8, type: 3}
+  bennelliM4: {fileID: 8300000, guid: 2fe2f2b27b47647438adca00fff40cd4, type: 3}
+  bennelliM4Reload: {fileID: 8300000, guid: f0fcca1457000da47ad1a955b1105e5c, type: 3}
+  rPG7: {fileID: 8300000, guid: 009a7ccdd039c0f498e94633b2c8a021, type: 3}
+  rPG7Reload: {fileID: 8300000, guid: 42e895437e594e84d9f2e2e5c42ac53c, type: 3}
 --- !u!1001 &670670197
 PrefabInstance:
   m_ObjectHideFlags: 0

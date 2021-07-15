@@ -56,7 +56,14 @@ public class GunsController : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource source;
-    public AudioClip cannonShootSFX;
+    //public AudioClip cannonShootSFX;
+    public AudioClip m107;
+    public AudioClip m249;
+    public AudioClip m249Reload;
+    public AudioClip bennelliM4;
+    public AudioClip bennelliM4Reload;
+    public AudioClip rPG7;
+    public AudioClip rPG7Reload;
 
     [Header("Other setting")]
     private bool isReloadingLeft, isReloadingRight, isBennelliM4DelayLeft, isBennelliM4DelayRight;
@@ -75,7 +82,8 @@ public class GunsController : MonoBehaviour
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                 {
-                    source.PlayOneShot(cannonShootSFX, 0.5f);
+                    //source.PlayOneShot(cannonShootSFX, 0.5f);
+                    source.PlayOneShot(m107);
                     GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnLeft.transform.position, m107SpawnLeft.transform.rotation);
                     Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                     Vector3 directionVector = hit.point - m107SpawnLeft.transform.position;
@@ -90,7 +98,7 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        //source.PlayOneShot(cannonShootSFX, 0.5f);
+                        source.PlayOneShot(bennelliM4);
                         GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Left.transform.position, bennelliM4SpawnLeft.transform.rotation);
                         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                         Vector3 directionVector = hit.point - bennelliM4SpawnLeft.transform.position;
@@ -112,7 +120,7 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        //source.PlayOneShot(cannonShootSFX, 0.5f);
+                        source.PlayOneShot(rPG7);
                         GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnLeft.transform.position, rPG7SpawnLeft.transform.rotation);
                         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                         Vector3 directionVector = hit.point - rPG7SpawnLeft.transform.position;
@@ -136,7 +144,8 @@ public class GunsController : MonoBehaviour
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                 {
-                    source.PlayOneShot(cannonShootSFX, 0.5f);
+                    //source.PlayOneShot(cannonShootSFX, 0.5f);
+                    source.PlayOneShot(m107);
                     GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnRight.transform.position, m107SpawnRight.transform.rotation);
                     Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                     Vector3 directionVector = hit.point - m107SpawnRight.transform.position;
@@ -151,7 +160,7 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        //source.PlayOneShot(cannonShootSFX, 0.5f);
+                        source.PlayOneShot(bennelliM4);
                         GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Right.transform.position, bennelliM4SpawnRight.transform.rotation);
                         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                         Vector3 directionVector = hit.point - bennelliM4SpawnRight.transform.position;
@@ -173,7 +182,7 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        //source.PlayOneShot(cannonShootSFX, 0.5f);
+                        source.PlayOneShot(rPG7);
                         GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnRight.transform.position, rPG7SpawnRight.transform.rotation);
                         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
                         Vector3 directionVector = hit.point - rPG7SpawnRight.transform.position;
@@ -233,11 +242,13 @@ public class GunsController : MonoBehaviour
         {
             if ((m249Ammo - m249Clip) >= 0)
             {
+                source.PlayOneShot(m249Reload);
                 m249CurrentClipLeft = m249Clip;
                 m249Ammo = m249Ammo - m249Clip;
             }
             else if ((m249Ammo - m249Clip) < 0)
             {
+                source.PlayOneShot(m249Reload);
                 m249CurrentClipLeft = m249Ammo;
                 m249Ammo = 0;
             }
@@ -247,11 +258,13 @@ public class GunsController : MonoBehaviour
         {
             if ((bennelliM4Ammo - bennelliM4Clip) >= 0)
             {
+                source.PlayOneShot(bennelliM4Reload);
                 bennelliM4CurrentClipLeft = bennelliM4Clip;
                 bennelliM4Ammo = bennelliM4Ammo - bennelliM4Clip;
             }
             else if ((bennelliM4Ammo - bennelliM4Clip) < 0)
             {
+                source.PlayOneShot(bennelliM4Reload);
                 bennelliM4CurrentClipLeft = bennelliM4Ammo;
                 bennelliM4Ammo = 0;
             }
@@ -261,11 +274,13 @@ public class GunsController : MonoBehaviour
         {
             if ((rPG7Ammo - rPG7Clip) >= 0)
             {
+                source.PlayOneShot(rPG7Reload);
                 rPG7CurrentClipLeft = rPG7Clip;
                 rPG7Ammo = rPG7Ammo - rPG7Clip;
             }
             else if ((rPG7Ammo - rPG7Clip) < 0)
             {
+                source.PlayOneShot(rPG7Reload);
                 rPG7CurrentClipLeft = rPG7Ammo;
                 rPG7Ammo = 0;
             }
@@ -280,11 +295,13 @@ public class GunsController : MonoBehaviour
         {
             if ((m249Ammo - m249Clip) >= 0)
             {
+                source.PlayOneShot(m249Reload);
                 m249CurrentClipRight = m249Clip;
                 m249Ammo = m249Ammo - m249Clip;
             }
             else if ((m249Ammo - m249Clip) < 0)
             {
+                source.PlayOneShot(m249Reload);
                 m249CurrentClipRight = m249Ammo;
                 m249Ammo = 0;
             }
@@ -294,11 +311,13 @@ public class GunsController : MonoBehaviour
         {
             if ((bennelliM4Ammo - bennelliM4Clip) >= 0)
             {
+                source.PlayOneShot(bennelliM4Reload);
                 bennelliM4CurrentClipRight = bennelliM4Clip;
                 bennelliM4Ammo = bennelliM4Ammo - bennelliM4Clip;
             }
             else if ((bennelliM4Ammo - bennelliM4Clip) < 0)
             {
+                source.PlayOneShot(bennelliM4Reload);
                 bennelliM4CurrentClipRight = bennelliM4Ammo;
                 bennelliM4Ammo = 0;
             }
@@ -308,11 +327,13 @@ public class GunsController : MonoBehaviour
         {
             if ((rPG7Ammo - rPG7Clip) >= 0)
             {
+                source.PlayOneShot(rPG7Reload);
                 rPG7CurrentClipRight = rPG7Clip;
                 rPG7Ammo = rPG7Ammo - rPG7Clip;
             }
             else if ((rPG7Ammo - rPG7Clip) < 0)
             {
+                source.PlayOneShot(rPG7Reload);
                 rPG7CurrentClipRight = rPG7Ammo;
                 rPG7Ammo = 0;
             }
@@ -323,7 +344,7 @@ public class GunsController : MonoBehaviour
 
     void M249FireLeft()
     {
-        //source.PlayOneShot(cannonShootSFX, 0.5f);
+        source.PlayOneShot(m249);
         GameObject PlayerBullet1 = Instantiate(m249Bullet, m249SpawnLeft.transform.position, m249SpawnLeft.transform.rotation);
         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
         Vector3 directionVector = hit.point - m249SpawnLeft.transform.position;
@@ -333,7 +354,7 @@ public class GunsController : MonoBehaviour
 
     void M249FireRight()
     {
-        //source.PlayOneShot(cannonShootSFX, 0.5f);
+        source.PlayOneShot(m249);
         GameObject PlayerBullet1 = Instantiate(m249Bullet, m249SpawnRight.transform.position, m249SpawnRight.transform.rotation);
         Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
         Vector3 directionVector = hit.point - m249SpawnRight.transform.position;
