@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Controls")]
+    public Joystick joystick;
+    public float horizontalSensitivity;
+    public float verticalSensitivity;
+    public bool isJumpPressed;
 
+    [Header("Player Move")]
     public CharacterController controller;
     public bool isGrounded, isDashing, isAlarmOn, isWalking, isLanding, isOutOFFuel;
     public float groundRadius = 0.5f;
@@ -42,10 +48,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float maxFlightFuel = 2000.0f;
     public float flightFuel;
 
-
     // Start is called before the first frame update
     void Start()
     {
+        //GameObject moveJoystick = GameObject.FindWithTag("MoveStick");
+        //joystick = moveJoystick.GetComponent<Joystick>();
         audioSource.PlayOneShot(mechStartup, 0.5f);
         controller = GetComponent<CharacterController>();
         
@@ -56,6 +63,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Fuel setting
         flightFuel = maxFlightFuel;
         fuelBar.SetMaxFuel(maxFlightFuel);
+
     }
 
     // Update is called once per frame
@@ -87,22 +95,28 @@ public class PlayerBehaviour : MonoBehaviour
             velocity.y = -2.0f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        //Input for WebGL and Desktop
+        //float x = Input.GetAxis("Horizontal");
+        //float z = Input.GetAxis("Vertical");
 
-        if (Input.GetKey("w") && isWalking == false && isGrounded == true)
+        
+        float x = joystick.Horizontal;
+        float z = joystick.Vertical;
+
+
+        if (z > 0 && isWalking == false && isGrounded == true)
         {
             Walk();
         }
-        else if (Input.GetKey("a") && isWalking == false && isGrounded == true)
+        else if (x < 0 && isWalking == false && isGrounded == true)
         {
             Walk();
         }
-        else if (Input.GetKey("s") && isWalking == false && isGrounded == true)
+        else if (z < 0 && isWalking == false && isGrounded == true)
         {
             Walk();
         }
-        else if (Input.GetKey("d") && isWalking == false && isGrounded == true)
+        else if (x > 0 && isWalking == false && isGrounded == true)
         {
             Walk();
         }
@@ -113,7 +127,7 @@ public class PlayerBehaviour : MonoBehaviour
             controller.Move(move * maxSpeed * Time.deltaTime);
         }
 
-        
+
         if (isDashing == false && Input.GetKeyUp(KeyCode.LeftShift) && isGrounded && move != new Vector3(0, 0, 0))
         {
             audioSource.PlayOneShot(mechDash, 0.5f);
@@ -127,24 +141,23 @@ public class PlayerBehaviour : MonoBehaviour
         {
             controller.Move(dashDirection * dashForce * Time.deltaTime);
         }    
-        if(Input.GetButtonDown("Jump")){
-            if(isGrounded){
-                velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
-                audioSource.PlayOneShot(mechJump, 0.6f);
-            }
-            else if(!isGrounded && flightFuel != 0.0f){
-                audioSource.PlayOneShot(mechFlight, 0.6f);
-            }
+        //if(Input.GetButtonDown("Jump")){
+        //    if(isGrounded){
+        //        Jump();
+        //    }
+        //    else if(!isGrounded && flightFuel != 0.0f){
+        //        audioSource.PlayOneShot(mechFlight, 0.6f);
+        //    }
 
-        }    
+        //}    
 
 
-        if (Input.GetButton("Jump") && isGrounded == false && flightFuel != 0.0f)
-        {
-            velocity.y += flightForce;
-            flightFuel--;
-            fuelBar.SetFuel(flightFuel);
-        }
+        //if (Input.GetButton("Jump") && isGrounded == false && flightFuel != 0.0f)
+        //{
+        //    velocity.y += flightForce;
+        //    flightFuel--;
+        //    fuelBar.SetFuel(flightFuel);
+        //}
 
         if (flightFuel == 0.0f && isOutOFFuel == false)
         {
@@ -162,6 +175,13 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
     }
+
+    void Jump()
+    {
+        velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        audioSource.PlayOneShot(mechJump, 0.6f);
+    }
+
 
     void OnDrawGizmos()
     {
@@ -214,7 +234,23 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
     
+    public void OnJumpButtonPressed()
+    {
+        if (isGrounded)
+        {
+            Jump();
+        }
+        else if (!isGrounded && flightFuel != 0.0f)
+        {
+            audioSource.PlayOneShot(mechFlight, 0.6f);
+        }
 
-    
-     
-}
+        if (isGrounded == false && flightFuel != 0.0f)
+        {
+            velocity.y += flightForce;
+            flightFuel--;
+            fuelBar.SetFuel(flightFuel);
+        }
+    }
+
+    }

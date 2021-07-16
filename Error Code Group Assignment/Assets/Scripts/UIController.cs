@@ -31,37 +31,37 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameIsPaused = !GameIsPaused;
-            Debug.Log("Esc");
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    GameIsPaused = !GameIsPaused;
+        //    Debug.Log("Esc");
             
-            if (GameIsPaused)
-            {
+        //    if (GameIsPaused)
+        //    {
 
-                Paused();
+        //        Paused();
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-                PausedResume();
+        //        PausedResume();
 
-            }
-        }   
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            GameIsPaused = !GameIsPaused;
+        //    }
+        //}   
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    GameIsPaused = !GameIsPaused;
             
-            if (GameIsPaused)
-            {
-                InventoryPaused();
-            }
-            else
-            {
-                InventoryResume();
-            }
-        }
+        //    if (GameIsPaused)
+        //    {
+        //        InventoryPaused();
+        //    }
+        //    else
+        //    {
+        //        InventoryResume();
+        //    }
+        //}
     }
 
     public void PausedResume()
@@ -145,6 +145,39 @@ public class UIController : MonoBehaviour
             gunController
         );
         save.Persist();
+    }
+
+    public void OnPausedButtonPressed()
+    {
+        GameIsPaused = !GameIsPaused;
+        Debug.Log("Esc");
+
+        if (GameIsPaused)
+        {
+
+            Paused();
+
+        }
+        else
+        {
+
+            PausedResume();
+
+        }
+    }
+
+    public void OnWeaponButtonPressed()
+    {
+        GameIsPaused = !GameIsPaused;
+
+        if (GameIsPaused)
+        {
+            InventoryPaused();
+        }
+        else
+        {
+            InventoryResume();
+        }
     }
 
     //public void ShowMouseCursor()

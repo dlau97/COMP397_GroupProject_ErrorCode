@@ -76,164 +76,164 @@ public class GunsController : MonoBehaviour
         startPosition = fpsCamera.transform.position;
         startPosition.z += 1f;
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
-            {
-                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                {
-                    //source.PlayOneShot(cannonShootSFX, 0.5f);
-                    source.PlayOneShot(m107);
-                    GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnLeft.transform.position, m107SpawnLeft.transform.rotation);
-                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                    Vector3 directionVector = hit.point - m107SpawnLeft.transform.position;
-                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                }
-                isReloadingLeft = true;
-                Invoke("IsReloadingLeft", 0.5f);
-            }
-            else if (bennelliM4Left.activeInHierarchy == true && isReloadingLeft == false && isBennelliM4DelayLeft == false)
-            {
-                if (bennelliM4CurrentClipLeft != 0)
-                {
-                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                    {
-                        source.PlayOneShot(bennelliM4);
-                        GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Left.transform.position, bennelliM4SpawnLeft.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - bennelliM4SpawnLeft.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                    }
-                    bennelliM4CurrentClipLeft--;
-                    isBennelliM4DelayLeft = true;
-                    Invoke("BennelliM4DelayLeft", 1f);
-                }
-                else if (bennelliM4CurrentClipLeft == 0 && bennelliM4Ammo != 0)
-                {
-                    isReloadingLeft = true;
-                    Invoke("IsReloadingLeft", 6.0f);
-                }
-            }
-            else if (rPG7Left.activeInHierarchy == true && isReloadingLeft == false)
-            {
-                if (rPG7CurrentClipLeft != 0)
-                {
-                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                    {
-                        source.PlayOneShot(rPG7);
-                        GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnLeft.transform.position, rPG7SpawnLeft.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - rPG7SpawnLeft.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                    }
-                    rPG7CurrentClipLeft--;
-                    isReloadingLeft = true;
-                    Invoke("IsReloadingLeft", 2.0f);
-                }
-                else if (rPG7CurrentClipLeft == 0 && rPG7Ammo != 0)
-                {
-                    isReloadingLeft = true;
-                    Invoke("IsReloadingLeft", 2.0f);
-                }
-            }
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
+        //    {
+        //        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //        {
+        //            //source.PlayOneShot(cannonShootSFX, 0.5f);
+        //            source.PlayOneShot(m107);
+        //            GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnLeft.transform.position, m107SpawnLeft.transform.rotation);
+        //            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //            Vector3 directionVector = hit.point - m107SpawnLeft.transform.position;
+        //            bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //        }
+        //        isReloadingLeft = true;
+        //        Invoke("IsReloadingLeft", 0.5f);
+        //    }
+        //    else if (bennelliM4Left.activeInHierarchy == true && isReloadingLeft == false && isBennelliM4DelayLeft == false)
+        //    {
+        //        if (bennelliM4CurrentClipLeft != 0)
+        //        {
+        //            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //            {
+        //                source.PlayOneShot(bennelliM4);
+        //                GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Left.transform.position, bennelliM4SpawnLeft.transform.rotation);
+        //                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //                Vector3 directionVector = hit.point - bennelliM4SpawnLeft.transform.position;
+        //                bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //            }
+        //            bennelliM4CurrentClipLeft--;
+        //            isBennelliM4DelayLeft = true;
+        //            Invoke("BennelliM4DelayLeft", 1f);
+        //        }
+        //        else if (bennelliM4CurrentClipLeft == 0 && bennelliM4Ammo != 0)
+        //        {
+        //            isReloadingLeft = true;
+        //            Invoke("IsReloadingLeft", 6.0f);
+        //        }
+        //    }
+        //    else if (rPG7Left.activeInHierarchy == true && isReloadingLeft == false)
+        //    {
+        //        if (rPG7CurrentClipLeft != 0)
+        //        {
+        //            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //            {
+        //                source.PlayOneShot(rPG7);
+        //                GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnLeft.transform.position, rPG7SpawnLeft.transform.rotation);
+        //                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //                Vector3 directionVector = hit.point - rPG7SpawnLeft.transform.position;
+        //                bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //            }
+        //            rPG7CurrentClipLeft--;
+        //            isReloadingLeft = true;
+        //            Invoke("IsReloadingLeft", 2.0f);
+        //        }
+        //        else if (rPG7CurrentClipLeft == 0 && rPG7Ammo != 0)
+        //        {
+        //            isReloadingLeft = true;
+        //            Invoke("IsReloadingLeft", 2.0f);
+        //        }
+        //    }
+        //}
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            if (m107Right.activeInHierarchy == true && isReloadingRight == false)
-            {
-                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                {
-                    //source.PlayOneShot(cannonShootSFX, 0.5f);
-                    source.PlayOneShot(m107);
-                    GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnRight.transform.position, m107SpawnRight.transform.rotation);
-                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                    Vector3 directionVector = hit.point - m107SpawnRight.transform.position;
-                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                }
-                isReloadingRight = true;
-                Invoke("IsReloadingRight", 0.5f);
-            }
-            else if (bennelliM4Right.activeInHierarchy == true && isReloadingRight == false && isBennelliM4DelayRight == false)
-            {
-                if (bennelliM4CurrentClipRight != 0)
-                {
-                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                    {
-                        source.PlayOneShot(bennelliM4);
-                        GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Right.transform.position, bennelliM4SpawnRight.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - bennelliM4SpawnRight.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                    }
-                    bennelliM4CurrentClipRight--;
-                    isBennelliM4DelayRight = true;
-                    Invoke("BennelliM4DelayRight", 1f);
-                }
-                else if (bennelliM4CurrentClipRight == 0 && bennelliM4Ammo != 0)
-                {
-                    isReloadingRight = true;
-                    Invoke("IsReloadingRight", 6.0f);
-                }
-            }
-            else if (rPG7Right.activeInHierarchy == true && isReloadingRight == false)
-            {
-                if (rPG7CurrentClipRight != 0)
-                {
-                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                    {
-                        source.PlayOneShot(rPG7);
-                        GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnRight.transform.position, rPG7SpawnRight.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - rPG7SpawnRight.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
-                    }
-                    rPG7CurrentClipRight--;
-                    isReloadingRight = true;
-                    Invoke("IsReloadingRight", 2.0f);
-                }
-                else if (rPG7CurrentClipRight == 0 && rPG7Ammo != 0)
-                {
-                    isReloadingRight = true;
-                    Invoke("IsReloadingRight", 2.0f);
-                }
-            }
-        }
+        //if (Input.GetButtonDown("Fire2"))
+        //{
+        //    if (m107Right.activeInHierarchy == true && isReloadingRight == false)
+        //    {
+        //        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //        {
+        //            //source.PlayOneShot(cannonShootSFX, 0.5f);
+        //            source.PlayOneShot(m107);
+        //            GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnRight.transform.position, m107SpawnRight.transform.rotation);
+        //            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //            Vector3 directionVector = hit.point - m107SpawnRight.transform.position;
+        //            bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //        }
+        //        isReloadingRight = true;
+        //        Invoke("IsReloadingRight", 0.5f);
+        //    }
+        //    else if (bennelliM4Right.activeInHierarchy == true && isReloadingRight == false && isBennelliM4DelayRight == false)
+        //    {
+        //        if (bennelliM4CurrentClipRight != 0)
+        //        {
+        //            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //            {
+        //                source.PlayOneShot(bennelliM4);
+        //                GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Right.transform.position, bennelliM4SpawnRight.transform.rotation);
+        //                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //                Vector3 directionVector = hit.point - bennelliM4SpawnRight.transform.position;
+        //                bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //            }
+        //            bennelliM4CurrentClipRight--;
+        //            isBennelliM4DelayRight = true;
+        //            Invoke("BennelliM4DelayRight", 1f);
+        //        }
+        //        else if (bennelliM4CurrentClipRight == 0 && bennelliM4Ammo != 0)
+        //        {
+        //            isReloadingRight = true;
+        //            Invoke("IsReloadingRight", 6.0f);
+        //        }
+        //    }
+        //    else if (rPG7Right.activeInHierarchy == true && isReloadingRight == false)
+        //    {
+        //        if (rPG7CurrentClipRight != 0)
+        //        {
+        //            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //            {
+        //                source.PlayOneShot(rPG7);
+        //                GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnRight.transform.position, rPG7SpawnRight.transform.rotation);
+        //                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+        //                Vector3 directionVector = hit.point - rPG7SpawnRight.transform.position;
+        //                bulletRB.velocity = directionVector.normalized * bulletSpeed;
+        //            }
+        //            rPG7CurrentClipRight--;
+        //            isReloadingRight = true;
+        //            Invoke("IsReloadingRight", 2.0f);
+        //        }
+        //        else if (rPG7CurrentClipRight == 0 && rPG7Ammo != 0)
+        //        {
+        //            isReloadingRight = true;
+        //            Invoke("IsReloadingRight", 2.0f);
+        //        }
+        //    }
+        //}
     }
 
     void FixedUpdate()
     {
-        if (Input.GetButton("Fire1"))
-        {
-            if (m249Left.activeInHierarchy == true && isReloadingLeft == false && m249CurrentClipLeft != 0)
-            {
-                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                {
-                    M249FireLeft();
-                }
-            }
-            else if (m249Left.activeInHierarchy == true && isReloadingLeft == false && m249CurrentClipLeft == 0 && m249Ammo != 0)
-            {
-                isReloadingLeft = true;
-                Invoke("IsReloadingLeft", 5.0f);
-            }
-        }
+        //if (Input.GetButton("Fire1"))
+        //{
+        //    if (m249Left.activeInHierarchy == true && isReloadingLeft == false && m249CurrentClipLeft != 0)
+        //    {
+        //        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //        {
+        //            M249FireLeft();
+        //        }
+        //    }
+        //    else if (m249Left.activeInHierarchy == true && isReloadingLeft == false && m249CurrentClipLeft == 0 && m249Ammo != 0)
+        //    {
+        //        isReloadingLeft = true;
+        //        Invoke("IsReloadingLeft", 5.0f);
+        //    }
+        //}
 
-        if (Input.GetButton("Fire2"))
-        {
-            if (m249Right.activeInHierarchy == true && isReloadingRight == false && m249CurrentClipRight != 0)
-            {
-                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-                {
-                    M249FireRight();
-                }
-            }
-            else if (m249Right.activeInHierarchy == true && isReloadingRight == false && m249CurrentClipRight == 0 && m249Ammo != 0)
-            {
-                isReloadingRight = true;
-                Invoke("IsReloadingRight", 5.0f);
-            }
-        }
+        //if (Input.GetButton("Fire2"))
+        //{
+        //    if (m249Right.activeInHierarchy == true && isReloadingRight == false && m249CurrentClipRight != 0)
+        //    {
+        //        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        //        {
+        //            M249FireRight();
+        //        }
+        //    }
+        //    else if (m249Right.activeInHierarchy == true && isReloadingRight == false && m249CurrentClipRight == 0 && m249Ammo != 0)
+        //    {
+        //        isReloadingRight = true;
+        //        Invoke("IsReloadingRight", 5.0f);
+        //    }
+        //}
     }
 
     void IsReloadingLeft()
@@ -370,5 +370,130 @@ public class GunsController : MonoBehaviour
     void BennelliM4DelayRight()
     {
         isBennelliM4DelayRight = false;
+    }
+
+    public void OnLeftShootButtonPressed()
+    {
+            if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
+            {
+                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                {
+                    //source.PlayOneShot(cannonShootSFX, 0.5f);
+                    source.PlayOneShot(m107);
+                    GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnLeft.transform.position, m107SpawnLeft.transform.rotation);
+                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                    Vector3 directionVector = hit.point - m107SpawnLeft.transform.position;
+                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                }
+                isReloadingLeft = true;
+                Invoke("IsReloadingLeft", 0.5f);
+            }
+            else if (bennelliM4Left.activeInHierarchy == true && isReloadingLeft == false && isBennelliM4DelayLeft == false)
+            {
+                if (bennelliM4CurrentClipLeft != 0)
+                {
+                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                    {
+                        source.PlayOneShot(bennelliM4);
+                        GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Left.transform.position, bennelliM4SpawnLeft.transform.rotation);
+                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                        Vector3 directionVector = hit.point - bennelliM4SpawnLeft.transform.position;
+                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                    }
+                    bennelliM4CurrentClipLeft--;
+                    isBennelliM4DelayLeft = true;
+                    Invoke("BennelliM4DelayLeft", 1f);
+                }
+                else if (bennelliM4CurrentClipLeft == 0 && bennelliM4Ammo != 0)
+                {
+                    isReloadingLeft = true;
+                    Invoke("IsReloadingLeft", 6.0f);
+                }
+            }
+            else if (rPG7Left.activeInHierarchy == true && isReloadingLeft == false)
+            {
+                if (rPG7CurrentClipLeft != 0)
+                {
+                    if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                    {
+                        source.PlayOneShot(rPG7);
+                        GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnLeft.transform.position, rPG7SpawnLeft.transform.rotation);
+                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                        Vector3 directionVector = hit.point - rPG7SpawnLeft.transform.position;
+                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                    }
+                    rPG7CurrentClipLeft--;
+                    isReloadingLeft = true;
+                    Invoke("IsReloadingLeft", 2.0f);
+                }
+                else if (rPG7CurrentClipLeft == 0 && rPG7Ammo != 0)
+                {
+                    isReloadingLeft = true;
+                    Invoke("IsReloadingLeft", 2.0f);
+                }
+            }
+        
+    }
+
+    public void OnRightShootButtonPressed()
+    {
+        if (m107Right.activeInHierarchy == true && isReloadingRight == false)
+        {
+            if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+            {
+                //source.PlayOneShot(cannonShootSFX, 0.5f);
+                source.PlayOneShot(m107);
+                GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnRight.transform.position, m107SpawnRight.transform.rotation);
+                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                Vector3 directionVector = hit.point - m107SpawnRight.transform.position;
+                bulletRB.velocity = directionVector.normalized * bulletSpeed;
+            }
+            isReloadingRight = true;
+            Invoke("IsReloadingRight", 0.5f);
+        }
+        else if (bennelliM4Right.activeInHierarchy == true && isReloadingRight == false && isBennelliM4DelayRight == false)
+        {
+            if (bennelliM4CurrentClipRight != 0)
+            {
+                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                {
+                    source.PlayOneShot(bennelliM4);
+                    GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Right.transform.position, bennelliM4SpawnRight.transform.rotation);
+                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                    Vector3 directionVector = hit.point - bennelliM4SpawnRight.transform.position;
+                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                }
+                bennelliM4CurrentClipRight--;
+                isBennelliM4DelayRight = true;
+                Invoke("BennelliM4DelayRight", 1f);
+            }
+            else if (bennelliM4CurrentClipRight == 0 && bennelliM4Ammo != 0)
+            {
+                isReloadingRight = true;
+                Invoke("IsReloadingRight", 6.0f);
+            }
+        }
+        else if (rPG7Right.activeInHierarchy == true && isReloadingRight == false)
+        {
+            if (rPG7CurrentClipRight != 0)
+            {
+                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                {
+                    source.PlayOneShot(rPG7);
+                    GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnRight.transform.position, rPG7SpawnRight.transform.rotation);
+                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+                    Vector3 directionVector = hit.point - rPG7SpawnRight.transform.position;
+                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                }
+                rPG7CurrentClipRight--;
+                isReloadingRight = true;
+                Invoke("IsReloadingRight", 2.0f);
+            }
+            else if (rPG7CurrentClipRight == 0 && rPG7Ammo != 0)
+            {
+                isReloadingRight = true;
+                Invoke("IsReloadingRight", 2.0f);
+            }
+        }
     }
 }
