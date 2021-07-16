@@ -66,7 +66,7 @@ public class UIController : MonoBehaviour
 
     public void PausedResume()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         playerCamera.enabled = true;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(false);
@@ -79,7 +79,7 @@ public class UIController : MonoBehaviour
 
     void Paused()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
         playerCamera.enabled = false;
         pausable.TogglePaused();
         pauseMenuUI.SetActive(true);
@@ -93,8 +93,8 @@ public class UIController : MonoBehaviour
 
     void InventoryPaused()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
         playerCamera.enabled = false;
         pausable.TogglePaused();
         InventoryUI.SetActive(true);
@@ -108,8 +108,8 @@ public class UIController : MonoBehaviour
 
     public void InventoryResume()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         playerCamera.enabled = true;
         pausable.TogglePaused();
         InventoryUI.SetActive(false);
