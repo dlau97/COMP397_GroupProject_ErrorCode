@@ -74,6 +74,7 @@ public class EnemyController : MonoBehaviour
                     SuicideMoveTowardsPlayer();
                     if(GetDistanceToPlayer() <= 2.5f){
                         player.SendMessage("TakeDamage", 20f);
+                        GameObject.Find("Game Manager").SendMessage("EnemyKill");
                         Instantiate(explosionFX, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                         GameObject.Find("Sound Controller").SendMessage("PlayEnemyExplodeSFX");
                         Destroy(this.gameObject);

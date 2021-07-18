@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3564c8fb98b8bac499ce1dbd1e6b7a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  enemyShootSFX: {fileID: 0}
-  metalImpactSFX: {fileID: 0}
-  enemyExplodeSFX: {fileID: 0}
+  source: {fileID: 2878008952963173287}
+  enemyShootSFX: {fileID: 8300000, guid: dc606e2f9648d35499333097a6bd848b, type: 3}
+  metalImpactSFX: {fileID: 8300000, guid: 7733554ee3c4fbc429e387286a19af22, type: 3}
+  enemyExplodeSFX: {fileID: 8300000, guid: 63185ec9b5147b64c92812428ee210c0, type: 3}
+  mineExplodeSFX: {fileID: 8300000, guid: 9bf40f6a5a67d8445a66fbc2724575fa, type: 3}

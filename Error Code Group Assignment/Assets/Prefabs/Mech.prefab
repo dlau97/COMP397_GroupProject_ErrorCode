@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240347350}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.84, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 1777987530}
@@ -339,6 +339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9f78ec72300e9459fece29f11dc562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  horizontalSensitivity: 0.1
+  verticalSensitivity: 0.1
+  isJumpPressed: 0
   controller: {fileID: 1633817585318367356}
   isGrounded: 0
   isDashing: 0
@@ -475,16 +479,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e751202cdbff63a4f8b5d4887551a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 1000
+  joystick: {fileID: 0}
+  horizontalSensitivity: 0.1
+  verticalSensitivity: 0.1
+  mouseSensitivity: 400
   playerBody: {fileID: 1633817585318367357}
-  shakeIntensity: 0.5
+  shakeIntensity: 0.2
   decreaseFactor:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0041656494
+      value: 0.9919739
+      inSlope: -0.5616412
+      outSlope: -0.5616412
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7182128
+      value: 0.5909356
+      inSlope: -1.0386446
+      outSlope: -1.0386446
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.34099388
+    - serializedVersion: 3
+      time: 0.9874878
+      value: 0.0056533813
+      inSlope: -2.1735482
+      outSlope: -2.1735482
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 1633817586828896953}
 --- !u!82 &2407436202475701956
 AudioSource:
   m_ObjectHideFlags: 0

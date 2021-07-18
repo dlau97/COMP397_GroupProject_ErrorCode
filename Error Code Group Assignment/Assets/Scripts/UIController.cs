@@ -68,7 +68,7 @@ public class UIController : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.Locked;
         playerCamera.enabled = true;
-        pausable.TogglePaused();
+        //pausable.TogglePaused();
         pauseMenuUI.SetActive(false);
         crosshairUI.SetActive(true);
         enemyCounterText.SetActive(true);
@@ -81,7 +81,7 @@ public class UIController : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.None;
         playerCamera.enabled = false;
-        pausable.TogglePaused();
+        //pausable.TogglePaused();
         pauseMenuUI.SetActive(true);
         enemyCounterText.SetActive(false);
         crosshairUI.SetActive(false);
@@ -122,11 +122,14 @@ public class UIController : MonoBehaviour
 
     public void LoadMenu()
     {
+        Time.timeScale = 1f;
+        PausedResume();
         SceneManager.LoadScene("Start Menu");
     }   
     
     public void QuitGame()
     {
+        Time.timeScale = 1f;
         Debug.Log("Quitting game");
         Application.Quit();
     }
