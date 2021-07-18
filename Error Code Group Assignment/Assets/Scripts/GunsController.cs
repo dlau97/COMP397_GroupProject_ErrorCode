@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GunsController : MonoBehaviour
 {
+
     public float damage = 10f;
     public float range = 100f;
 
@@ -69,6 +70,138 @@ public class GunsController : MonoBehaviour
     private bool isReloadingLeft, isReloadingRight, isBennelliM4DelayLeft, isBennelliM4DelayRight;
     private RaycastHit hit;
     private Vector3 startPosition;
+
+
+    public abstract class Bullet
+    {
+        public GunsController gunsController;
+
+        public Bullet(GunsController gunsController)
+        {
+            this.gunsController = gunsController;
+        }
+        public abstract void FireLeft();
+        public abstract void FireRight();
+    }
+
+    class M107Bullet : Bullet
+    {
+        public M107Bullet(GunsController gunsController): base(gunsController) { }
+
+        public override void FireLeft()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.m107);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.m107Bullet,
+                this.gunsController.m107SpawnLeft.transform.position,
+                this.gunsController.m107SpawnLeft.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.m107SpawnLeft.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+
+        public override void FireRight()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.m107);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.m107Bullet,
+                this.gunsController.m107SpawnRight.transform.position,
+                this.gunsController.m107SpawnRight.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.m107SpawnRight.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+    }
+
+    class BennelliM4Bullet : Bullet
+    {
+        public BennelliM4Bullet(GunsController gunsController) : base(gunsController) { }
+
+        public override void FireLeft()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.bennelliM4);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.bennelliM4Bullet,
+                this.gunsController.bennelliM4Left.transform.position,
+                this.gunsController.bennelliM4SpawnLeft.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.bennelliM4SpawnLeft.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+
+        public override void FireRight()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.bennelliM4);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.bennelliM4Bullet,
+                this.gunsController.bennelliM4Right.transform.position,
+                this.gunsController.bennelliM4SpawnRight.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.bennelliM4SpawnRight.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+    }
+
+    class RPG7Bullet : Bullet
+    {
+        public RPG7Bullet(GunsController gunsController) : base(gunsController) { }
+
+        public override void FireLeft()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.rPG7);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.rPG7Bullet,
+                this.gunsController.rPG7SpawnLeft.transform.position, 
+                this.gunsController.rPG7SpawnLeft.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.rPG7SpawnLeft.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+
+        public override void FireRight()
+        {
+            this.gunsController.source.PlayOneShot(this.gunsController.rPG7);
+            GameObject PlayerBullet1 = Instantiate(
+                this.gunsController.rPG7Bullet,
+                this.gunsController.rPG7SpawnRight.transform.position,
+                this.gunsController.rPG7SpawnRight.transform.rotation
+            );
+            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.rPG7SpawnRight.transform.position;
+            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
+        }
+    }
+
+    class BulletFactory
+    {
+        private GunsController gunsController;
+
+        public BulletFactory(GunsController gunsController)
+        {
+            this.gunsController = gunsController;
+        }
+
+        public Bullet createBullet(string name)
+        {
+            switch (name)
+            {
+                case "m107":
+                    return new M107Bullet(gunsController);
+                case "bennelliM4":
+                    return new BennelliM4Bullet(gunsController);
+                case "rGP7":
+                    return new RPG7Bullet(gunsController);
+                default:
+                    return null;
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -374,16 +507,14 @@ public class GunsController : MonoBehaviour
 
     public void OnLeftShootButtonPressed()
     {
-            if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
+        BulletFactory bulletFactory = new BulletFactory(this);
+        if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                 {
                     //source.PlayOneShot(cannonShootSFX, 0.5f);
-                    source.PlayOneShot(m107);
-                    GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnLeft.transform.position, m107SpawnLeft.transform.rotation);
-                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                    Vector3 directionVector = hit.point - m107SpawnLeft.transform.position;
-                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                    Bullet bullet = bulletFactory.createBullet("m107");
+                    bullet.FireLeft();
                 }
                 isReloadingLeft = true;
                 Invoke("IsReloadingLeft", 0.5f);
@@ -394,11 +525,8 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        source.PlayOneShot(bennelliM4);
-                        GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Left.transform.position, bennelliM4SpawnLeft.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - bennelliM4SpawnLeft.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                        Bullet bullet = bulletFactory.createBullet("bennelliM4");
+                        bullet.FireLeft();
                     }
                     bennelliM4CurrentClipLeft--;
                     isBennelliM4DelayLeft = true;
@@ -416,11 +544,8 @@ public class GunsController : MonoBehaviour
                 {
                     if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                     {
-                        source.PlayOneShot(rPG7);
-                        GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnLeft.transform.position, rPG7SpawnLeft.transform.rotation);
-                        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                        Vector3 directionVector = hit.point - rPG7SpawnLeft.transform.position;
-                        bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                        Bullet bullet = bulletFactory.createBullet("rPG7");
+                        bullet.FireLeft();
                     }
                     rPG7CurrentClipLeft--;
                     isReloadingLeft = true;
@@ -437,17 +562,15 @@ public class GunsController : MonoBehaviour
 
     public void OnRightShootButtonPressed()
     {
+        BulletFactory bulletFactory = new BulletFactory(this);
         if (m107Right.activeInHierarchy == true && isReloadingRight == false)
         {
             if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
             {
-                //source.PlayOneShot(cannonShootSFX, 0.5f);
-                source.PlayOneShot(m107);
-                GameObject PlayerBullet1 = Instantiate(m107Bullet, m107SpawnRight.transform.position, m107SpawnRight.transform.rotation);
-                Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                Vector3 directionVector = hit.point - m107SpawnRight.transform.position;
-                bulletRB.velocity = directionVector.normalized * bulletSpeed;
-            }
+                    //source.PlayOneShot(cannonShootSFX, 0.5f);
+                    Bullet bullet = bulletFactory.createBullet("m107");
+                    bullet.FireRight();
+                }
             isReloadingRight = true;
             Invoke("IsReloadingRight", 0.5f);
         }
@@ -457,11 +580,8 @@ public class GunsController : MonoBehaviour
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                 {
-                    source.PlayOneShot(bennelliM4);
-                    GameObject PlayerBullet1 = Instantiate(bennelliM4Bullet, bennelliM4Right.transform.position, bennelliM4SpawnRight.transform.rotation);
-                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                    Vector3 directionVector = hit.point - bennelliM4SpawnRight.transform.position;
-                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                    Bullet bullet = bulletFactory.createBullet("bennelliM4");
+                    bullet.FireRight();
                 }
                 bennelliM4CurrentClipRight--;
                 isBennelliM4DelayRight = true;
@@ -479,11 +599,8 @@ public class GunsController : MonoBehaviour
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
                 {
-                    source.PlayOneShot(rPG7);
-                    GameObject PlayerBullet1 = Instantiate(rPG7Bullet, rPG7SpawnRight.transform.position, rPG7SpawnRight.transform.rotation);
-                    Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-                    Vector3 directionVector = hit.point - rPG7SpawnRight.transform.position;
-                    bulletRB.velocity = directionVector.normalized * bulletSpeed;
+                    Bullet bullet = bulletFactory.createBullet("rPG7");
+                    bullet.FireRight();
                 }
                 rPG7CurrentClipRight--;
                 isReloadingRight = true;

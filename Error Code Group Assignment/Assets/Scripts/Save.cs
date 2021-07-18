@@ -12,7 +12,7 @@ public class Save
     [System.Serializable]
     public class Player
     {
-        public float currentHealth;
+        public int currentHealth;
         public float fuelLevel;
         public Vector3 position;
 
@@ -45,6 +45,22 @@ public class Save
                     return "Unknownn";
             }
         }
+
+        static public EnemyController.Enemy TypeFromTypeName(string type)
+        {
+            switch (type)
+            {
+                case "Static":
+                    return EnemyController.Enemy.Static;
+                case "Dynamic":
+                    return EnemyController.Enemy.Dynamic;
+                case "Suicide":
+                    return EnemyController.Enemy.Suicide;
+                default:
+                    return EnemyController.Enemy.Static;
+            }
+        }
+
 
         public Enemy(EnemyController enemyController)
         {
@@ -114,11 +130,58 @@ public class Save
         return new Save(player, enemies, guns);
     }
 
+    public static Save FromSaved ()
+    {
+        string path = Application.persistentDataPath + "/save.json";
+        string json = File.ReadAllText(path);
+        return JsonUtility.FromJson<Save>(json);
+    }
+
     public void Persist()
     {
         string json = JsonUtility.ToJson(this, true);
         string path = Application.persistentDataPath + "/save.json";
         File.WriteAllText(path, json);
         Debug.Log("Saving to "+path);
+    }
+
+    public void Load(PlayerBehaviour playerBehaviour, List<EnemyController> enemyControllers, GunsController gunController)
+    {
+        playerBehaviour.currentHealth = this.player.currentHealth;
+        playerBehaviour.flightFuel = this.player.fuelLevel;
+        playerBehaviour.transform.position = this.player.position;
+
+        for (int i = 0; i < this.enemies.Count; i++)
+        {
+            EnemyController enemyController = enemyControllers[i];
+            if (enemyController != null)
+            {
+                enemyController.enemyType = Enemy.TypeFromTypeName(this.enemies[i].typeName);
+                enemyController.health = this.enemies[i].health;
+                enemyController.transform.position = this.enemies[i].position;
+            }
+        }
+
+        foreach (Gun gun in this.guns)
+        {
+            if (gun.name == "M249")
+            {
+                gunController.m249CurrentClipLeft = gun.leftClips;
+                gunController.m249CurrentClipRight = gun.rightClips;
+                gunController.m249Ammo = gun.ammo;
+            }
+            else if (gun.name == "Bennelli M4")
+            {
+                gunController.bennelliM4CurrentClipLeft = gun.leftClips;
+                gunController.bennelliM4CurrentClipRight = gun.rightClips;
+                gunController.bennelliM4Ammo = gun.ammo;
+            }
+            else if (gun.name == "RPG7")
+            {
+                gunController.rPG7CurrentClipLeft = gun.leftClips;
+                gunController.rPG7CurrentClipRight = gun.rightClips;
+                gunController.rPG7Ammo = gun.ammo;
+            }
+        }
     }
 }

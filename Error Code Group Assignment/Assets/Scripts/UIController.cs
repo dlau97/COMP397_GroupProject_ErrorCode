@@ -150,6 +150,22 @@ public class UIController : MonoBehaviour
         save.Persist();
     }
 
+    public void LoadGame()
+    {
+        Debug.Log("Loading game");
+
+        PlayerBehaviour playerBehaviour = FindObjectOfType<PlayerBehaviour>();
+        List<EnemyController> enemyControllers = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+        GunsController gunController = FindObjectOfType<GunsController>();
+
+        Save save = Save.FromSaved();
+        save.Load(
+            playerBehaviour,
+            enemyControllers,
+            gunController
+        );
+    }
+
     public void OnPausedButtonPressed()
     {
         GameIsPaused = !GameIsPaused;
