@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using System.Text;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class Save
@@ -134,6 +135,7 @@ public class Save
     {
         string path = Application.persistentDataPath + "/save.json";
         string json = File.ReadAllText(path);
+        Debug.Log(json);
         return JsonUtility.FromJson<Save>(json);
     }
 
@@ -149,7 +151,9 @@ public class Save
     {
         playerBehaviour.currentHealth = this.player.currentHealth;
         playerBehaviour.flightFuel = this.player.fuelLevel;
-        playerBehaviour.transform.position = this.player.position;
+        playerBehaviour.gameObject.GetComponent<CharacterController>().enabled = false;
+        playerBehaviour.gameObject.transform.position = this.player.position;
+        playerBehaviour.gameObject.GetComponent<CharacterController>().enabled = true;
 
         for (int i = 0; i < this.enemies.Count; i++)
         {
@@ -158,7 +162,8 @@ public class Save
             {
                 enemyController.enemyType = Enemy.TypeFromTypeName(this.enemies[i].typeName);
                 enemyController.health = this.enemies[i].health;
-                enemyController.transform.position = this.enemies[i].position;
+                enemyController.gameObject.transform.position = this.enemies[i].position;
+
             }
         }
 
