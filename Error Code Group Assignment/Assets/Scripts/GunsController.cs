@@ -613,4 +613,11 @@ public class GunsController : MonoBehaviour
             }
         }
     }
+
+    public void OnBothShootButtonPressed()
+    {
+        OnRightShootButtonPressed();
+        OnLeftShootButtonPressed();
+
+    }
 }

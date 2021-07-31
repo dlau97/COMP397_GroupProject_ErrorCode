@@ -13,7 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Player Move")]
     public CharacterController controller;
-    public bool isGrounded, isDashing, isAlarmOn, isWalking, isLanding, isOutOFFuel;
+    public bool isGrounded, isAlarmOn, isDashing, isWalking, isLanding, isOutOFFuel;
     public float groundRadius = 0.5f;
     public float maxSpeed = 10.0f;
     public float gravity = -30.0f;
@@ -128,19 +128,20 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
 
-        if (isDashing == false && Input.GetKeyUp(KeyCode.LeftShift) && isGrounded && move != new Vector3(0, 0, 0))
-        {
-            audioSource.PlayOneShot(mechDash, 0.5f);
-            dashDirection = move;
-            Dash();
+        //if (isDashing == false && Input.GetKeyUp(KeyCode.LeftShift) && isGrounded && move != new Vector3(0, 0, 0))
+        //{
+        //    audioSource.PlayOneShot(mechDash, 0.5f);
+        //    dashDirection = move;
+        //    Dash();
 
-            Invoke("Dash", 0.25f);
-        }
+        //    Invoke("Dash", 0.25f);
+        //}
 
         if (isDashing == true)
         {
             controller.Move(dashDirection * dashForce * Time.deltaTime);
-        }    
+        }
+
         //if(Input.GetButtonDown("Jump")){
         //    if(isGrounded){
         //        Jump();
@@ -199,6 +200,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             isDashing = true;
         }
+
+
     }
 
     void Walk()
@@ -253,4 +256,17 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void OnDashButtonPressed()
+    {
+
+        if (isDashing == false && isGrounded && move != new Vector3(0, 0, 0))
+        {
+            audioSource.PlayOneShot(mechDash, 0.5f);
+            dashDirection = move;
+            Dash();
+
+            Invoke("Dash", 0.25f);
+        }
     }
+
+ }
