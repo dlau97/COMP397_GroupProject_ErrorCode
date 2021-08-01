@@ -139,7 +139,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (isDashing == true)
         {
-            controller.Move(dashDirection * dashForce * Time.deltaTime);
+            move = transform.right * x + transform.forward * z;
+            controller.Move(move * dashForce * Time.deltaTime);
         }
 
         //if(Input.GetButtonDown("Jump")){
@@ -259,8 +260,9 @@ public class PlayerBehaviour : MonoBehaviour
     public void OnDashButtonPressed()
     {
 
-        if (isDashing == false && isGrounded && move != new Vector3(0, 0, 0))
+        if (isDashing == false && isGrounded /*&& move != new Vector3(0, 0, 0)*/)
         {
+          
             audioSource.PlayOneShot(mechDash, 0.5f);
             dashDirection = move;
             Dash();
