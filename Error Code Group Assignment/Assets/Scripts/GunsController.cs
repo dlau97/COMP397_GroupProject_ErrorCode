@@ -8,8 +8,6 @@ public class GunsController : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
 
-    
-
     [Header("Gun M107")]
     public GameObject m107Left;
     public GameObject m107SpawnLeft;
@@ -28,16 +26,16 @@ public class GunsController : MonoBehaviour
     public int m249CurrentClipRight = 0;
     public int m249Ammo = 0;
 
-     [Header("Gun Bennelli M4")]
-    public GameObject bennelliM4Left;
-    public GameObject bennelliM4SpawnLeft;
-    public GameObject bennelliM4Right;
-    public GameObject bennelliM4SpawnRight;
-    public GameObject bennelliM4Bullet;
-    public int bennelliM4Clip = 6;
-    public int bennelliM4CurrentClipLeft = 0;
-    public int bennelliM4CurrentClipRight = 0;
-    public int bennelliM4Ammo = 0;
+	[Header("Gun Bennelli M4")]
+	public GameObject bennelliM4Left;
+	public GameObject bennelliM4SpawnLeft;
+	public GameObject bennelliM4Right;
+	public GameObject bennelliM4SpawnRight;
+	public GameObject bennelliM4Bullet;
+	public int bennelliM4Clip = 6;
+	public int bennelliM4CurrentClipLeft = 0;
+	public int bennelliM4CurrentClipRight = 0;
+	public int bennelliM4Ammo = 0;
 
     [Header("Gun RPG7")]
     public GameObject rPG7Left;
@@ -71,137 +69,233 @@ public class GunsController : MonoBehaviour
     private RaycastHit hit;
     private Vector3 startPosition;
 
+	public BulletPool bulletPool;
+	public BulletFactory bulletFactory;
 
-    public abstract class Bullet
-    {
-        public GunsController gunsController;
+	public class BulletPool 
+	{
+		public List<GameObject> m107Pool = new List<GameObject>();
+		public List<GameObject> bennelliM4Pool = new List<GameObject>();
+		public List<GameObject> rPG7Pool = new List<GameObject>();
 
-        public Bullet(GunsController gunsController)
-        {
-            this.gunsController = gunsController;
-        }
-        public abstract void FireLeft();
-        public abstract void FireRight();
-    }
+		public BulletPool(GameObject m107Bullet, GameObject bennelliM4Bullet, GameObject rPG7Bullet)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				GameObject m107 = Instantiate(m107Bullet);
+				GameObject bennelliM4 = Instantiate(bennelliM4Bullet);
+				GameObject rPG7 = Instantiate(rPG7Bullet);
 
-    class M107Bullet : Bullet
-    {
-        public M107Bullet(GunsController gunsController): base(gunsController) { }
+				m107.SetActive(false);
+				bennelliM4.SetActive(false);
+				rPG7.SetActive(false);
 
-        public override void FireLeft()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.m107);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.m107Bullet,
-                this.gunsController.m107SpawnLeft.transform.position,
-                this.gunsController.m107SpawnLeft.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.m107SpawnLeft.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
+				m107Pool.Add(m107);
+				bennelliM4Pool.Add(bennelliM4);
+				rPG7Pool.Add(rPG7);
+			}
+		}
 
-        public override void FireRight()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.m107);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.m107Bullet,
-                this.gunsController.m107SpawnRight.transform.position,
-                this.gunsController.m107SpawnRight.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.m107SpawnRight.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
-    }
+		public GameObject getBulletFromPool(List<GameObject> pool)
+		{
+			for(int i = 0; i < pool.Count; i++)
+			{
+				if(!pool[i].activeInHierarchy)
+				{
+					return pool[i];
+				}
+			} 
 
-    class BennelliM4Bullet : Bullet
-    {
-        public BennelliM4Bullet(GunsController gunsController) : base(gunsController) { }
+			return null;
+		}
 
-        public override void FireLeft()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.bennelliM4);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.bennelliM4Bullet,
-                this.gunsController.bennelliM4Left.transform.position,
-                this.gunsController.bennelliM4SpawnLeft.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.bennelliM4SpawnLeft.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
+		public GameObject getM107Bullet()
+		{
+			return getBulletFromPool(m107Pool);	
+		}
 
-        public override void FireRight()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.bennelliM4);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.bennelliM4Bullet,
-                this.gunsController.bennelliM4Right.transform.position,
-                this.gunsController.bennelliM4SpawnRight.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.bennelliM4SpawnRight.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
-    }
+		public GameObject getBennelliM4Bullet()
+		{
+			return getBulletFromPool(bennelliM4Pool);
+		}
 
-    class RPG7Bullet : Bullet
-    {
-        public RPG7Bullet(GunsController gunsController) : base(gunsController) { }
+		public GameObject getrPG7Bullet()
+		{
+			return getBulletFromPool(rPG7Pool);
+		}
 
-        public override void FireLeft()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.rPG7);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.rPG7Bullet,
-                this.gunsController.rPG7SpawnLeft.transform.position, 
-                this.gunsController.rPG7SpawnLeft.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.rPG7SpawnLeft.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
+	}
 
-        public override void FireRight()
-        {
-            this.gunsController.source.PlayOneShot(this.gunsController.rPG7);
-            GameObject PlayerBullet1 = Instantiate(
-                this.gunsController.rPG7Bullet,
-                this.gunsController.rPG7SpawnRight.transform.position,
-                this.gunsController.rPG7SpawnRight.transform.rotation
-            );
-            Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-            Vector3 directionVector = this.gunsController.hit.point - this.gunsController.rPG7SpawnRight.transform.position;
-            bulletRB.velocity = directionVector.normalized * this.gunsController.bulletSpeed;
-        }
-    }
+	public abstract class Bullet
+	{
+		public GameObject bullet;
+		public float speed;
+		public AudioSource audioSource;
+		public AudioClip bulletSound;
 
-    class BulletFactory
-    {
-        private GunsController gunsController;
 
-        public BulletFactory(GunsController gunsController)
-        {
-            this.gunsController = gunsController;
-        }
+		public Bullet(
+			GameObject bullet, 
+			float speed,
+			AudioSource audioSource,
+			AudioClip bulletSound
+		)
+		{
+			this.bullet = bullet;
+			this.speed = speed;
+			this.audioSource = audioSource;
+			this.bulletSound = bulletSound;
+		}
 
-        public Bullet createBullet(string name)
-        {
-            switch (name)
-            {
-                case "m107":
-                    return new M107Bullet(gunsController);
-                case "bennelliM4":
-                    return new BennelliM4Bullet(gunsController);
-                case "rGP7":
-                    return new RPG7Bullet(gunsController);
-                default:
-                    return null;
-            }
-        }
-    }
+		public void PlaySound()
+		{
+			audioSource.PlayOneShot(bulletSound);
+		}
 
+		protected void Fire(Vector3 position, Quaternion rotation, Vector3 targetPosition)
+		{
+			if (bullet == null) return;
+			bullet.SetActive(true);
+			PlaySound();
+			bullet.transform.position = position;
+			bullet.transform.rotation = rotation;
+			Rigidbody rigidBody = bullet.GetComponent<Rigidbody>();
+			Vector3 direction = targetPosition - position;
+			rigidBody.velocity = direction.normalized * speed;
+		}
+
+		public abstract void FireRight();
+		public abstract void FireLeft();
+	}
+
+	public class M107Bullet : Bullet
+	{
+		private GunsController gunsController;
+
+		public M107Bullet(GunsController gunsController) : base(
+			gunsController.bulletPool.getM107Bullet(),
+			gunsController.bulletSpeed,
+			gunsController.source,
+			gunsController.m107
+		)
+		{
+			this.gunsController = gunsController;
+		}
+
+		public override void FireLeft()
+		{
+			Fire(
+				gunsController.m107SpawnLeft.transform.position,
+				gunsController.m107SpawnLeft.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+		public override void FireRight()
+		{
+			Fire(
+				gunsController.m107SpawnRight.transform.position,
+				gunsController.m107SpawnRight.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+	}
+
+	public class BennelliM4Bullet : Bullet
+	{
+		private GunsController gunsController;
+		public BennelliM4Bullet(GunsController gunsController) : base(
+			gunsController.bulletPool.getBennelliM4Bullet(),
+			gunsController.bulletSpeed,
+			gunsController.source,
+			gunsController.bennelliM4
+		)
+		{ }
+
+		public override void FireLeft()
+		{
+			Fire(
+				gunsController.bennelliM4SpawnLeft.transform.position,
+				gunsController.bennelliM4SpawnLeft.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+
+		public override void FireRight()
+		{
+			Fire(
+				gunsController.bennelliM4SpawnRight.transform.position,
+				gunsController.bennelliM4SpawnRight.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+	}
+
+	public class RPG7Bullet : Bullet
+	{
+		private GunsController gunsController;
+		public RPG7Bullet(GunsController gunsController) : base(
+			gunsController.bulletPool.getrPG7Bullet(),
+			gunsController.bulletSpeed,
+			gunsController.source,
+			gunsController.rPG7
+		)
+		{ }
+
+		public override void FireLeft()
+		{
+			Fire(
+				gunsController.rPG7SpawnLeft.transform.position,
+				gunsController.rPG7SpawnLeft.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+
+		public override void FireRight()
+		{
+			Fire(
+				gunsController.rPG7SpawnRight.transform.position,
+				gunsController.rPG7SpawnRight.transform.rotation,
+				gunsController.hit.point
+			);
+		}
+	}
+
+
+	public class BulletFactory
+	{
+		private GunsController gunsController;
+
+		public BulletFactory(GunsController gunsController)
+		{
+			this.gunsController = gunsController;
+		}
+
+		public Bullet createBullet(string name)
+		{
+			switch (name)
+			{
+				case "m107":
+					return new M107Bullet(gunsController);
+				case "bennelliM4":
+					return new BennelliM4Bullet(gunsController);
+				case "rGP7":
+					return new RPG7Bullet(gunsController);
+				default:
+					return null;
+			}
+		}
+	}
+
+
+	void Start()
+	{
+		bulletPool = new BulletPool(
+			m107Bullet,
+			bennelliM4Bullet,
+			rPG7Bullet
+		);
+		bulletFactory = new BulletFactory(this);
+	}
 
     // Update is called once per frame
     void Update()
@@ -419,8 +513,8 @@ public class GunsController : MonoBehaviour
             }
         }
 
-        isReloadingLeft = false;
-    }
+    isReloadingLeft = false;
+  }
 
     void IsReloadingRight()
     {
@@ -456,34 +550,34 @@ public class GunsController : MonoBehaviour
             }
         }
 
-        if (rPG7Right.activeInHierarchy == true)
-        {
-            if ((rPG7Ammo - rPG7Clip) >= 0)
-            {
-                source.PlayOneShot(rPG7Reload);
-                rPG7CurrentClipRight = rPG7Clip;
-                rPG7Ammo = rPG7Ammo - rPG7Clip;
-            }
-            else if ((rPG7Ammo - rPG7Clip) < 0)
-            {
-                source.PlayOneShot(rPG7Reload);
-                rPG7CurrentClipRight = rPG7Ammo;
-                rPG7Ammo = 0;
-            }
-        }
-
-        isReloadingRight = false;
-    }
-
-    void M249FireLeft()
+    if (rPG7Right.activeInHierarchy == true)
     {
-        source.PlayOneShot(m249);
-        GameObject PlayerBullet1 = Instantiate(m249Bullet, m249SpawnLeft.transform.position, m249SpawnLeft.transform.rotation);
-        Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
-        Vector3 directionVector = hit.point - m249SpawnLeft.transform.position;
-        bulletRB.velocity = directionVector.normalized * bulletSpeed;
-        m249CurrentClipLeft--;
+      if ((rPG7Ammo - rPG7Clip) >= 0)
+      {
+        source.PlayOneShot(rPG7Reload);
+        rPG7CurrentClipRight = rPG7Clip;
+        rPG7Ammo = rPG7Ammo - rPG7Clip;
+      }
+      else if ((rPG7Ammo - rPG7Clip) < 0)
+      {
+        source.PlayOneShot(rPG7Reload);
+        rPG7CurrentClipRight = rPG7Ammo;
+        rPG7Ammo = 0;
+      }
     }
+
+    isReloadingRight = false;
+  }
+
+	void M249FireLeft()
+	{
+		source.PlayOneShot(m249);
+		GameObject PlayerBullet1 = Instantiate(m249Bullet, m249SpawnLeft.transform.position, m249SpawnLeft.transform.rotation);
+		Rigidbody bulletRB = PlayerBullet1.GetComponent<Rigidbody>();
+		Vector3 directionVector = hit.point - m249SpawnLeft.transform.position;
+		bulletRB.velocity = directionVector.normalized * bulletSpeed;
+		m249CurrentClipLeft--;
+	}
 
     void M249FireRight()
     {
@@ -507,7 +601,6 @@ public class GunsController : MonoBehaviour
 
     public void OnLeftShootButtonPressed()
     {
-        BulletFactory bulletFactory = new BulletFactory(this);
         if (m107Left.activeInHierarchy == true && isReloadingLeft == false)
             {
                 if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
@@ -562,7 +655,6 @@ public class GunsController : MonoBehaviour
 
     public void OnRightShootButtonPressed()
     {
-        BulletFactory bulletFactory = new BulletFactory(this);
         if (m107Right.activeInHierarchy == true && isReloadingRight == false)
         {
             if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
@@ -614,10 +706,9 @@ public class GunsController : MonoBehaviour
         }
     }
 
-    public void OnBothShootButtonPressed()
-    {
-        OnRightShootButtonPressed();
-        OnLeftShootButtonPressed();
-
-    }
+  public void OnBothShootButtonPressed()
+  {
+    OnRightShootButtonPressed();
+    OnLeftShootButtonPressed();
+  }
 }

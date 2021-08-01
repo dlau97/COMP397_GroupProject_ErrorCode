@@ -9,7 +9,7 @@ public class PlayerBulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, 6f); //Destroy bullet if it doesn't collide with anything after 6 seconds
+        // Destroy(this.gameObject, 6f); //Destroy bullet if it doesn't collide with anything after 6 seconds
     }
 
     // Update is called once per frame
@@ -30,14 +30,12 @@ public class PlayerBulletController : MonoBehaviour
                 other.gameObject.SendMessage("TakeDamage", BulletDamage);
 
             }
-
-            Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "Ground")
         {
             //Insert any collision sfx / vfx
 
-            Destroy(this.gameObject);
         }
+        this.gameObject.SetActive(false);
     }
 }
