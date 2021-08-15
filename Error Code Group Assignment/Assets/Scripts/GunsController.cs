@@ -32,9 +32,9 @@ public class GunsController : MonoBehaviour
 	public GameObject bennelliM4Right;
 	public GameObject bennelliM4SpawnRight;
 	public GameObject bennelliM4Bullet;
-	public int bennelliM4Clip = 6;
-	public int bennelliM4CurrentClipLeft = 0;
-	public int bennelliM4CurrentClipRight = 0;
+	public int bennelliM4Clip = 999;
+	public int bennelliM4CurrentClipLeft = 999;
+	public int bennelliM4CurrentClipRight =999;
 	public int bennelliM4Ammo = 0;
 
     [Header("Gun RPG7")]
